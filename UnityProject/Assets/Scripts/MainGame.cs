@@ -215,7 +215,7 @@ public class MainGame : MonoBehaviour {
 
     public bool BabyInCriticalNeed() {
         foreach (Transform t in babies) {
-            if (t.GetComponent<Baby>().critical_need())
+            if (t.GetComponent<Baby>().CriticalNeed())
                 return true;
         }
         return false;
@@ -229,7 +229,7 @@ public class MainGame : MonoBehaviour {
     //          GAME FUNCTIONS
     //*********************************************************
 
-    void GameOver() {
+    public void GameOver() {
         //...
     }
 }

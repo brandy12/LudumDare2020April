@@ -7,6 +7,9 @@ public class Baby : MonoBehaviour
 
     public int id { get; private set; }
 
+    MainGame mainGame;
+
+
     //*********************************************************
     //          BARS VARIABLES
     //*********************************************************
@@ -21,6 +24,9 @@ public class Baby : MonoBehaviour
     float speed_entertainment;
     float speed_diaper;
 
+    float timer_critical_need;
+    float duration_critical_need=5.0f;
+
     //*********************************************************
     //          SPRITE VARIABLES
     //*********************************************************
@@ -28,6 +34,8 @@ public class Baby : MonoBehaviour
     [SerializeField] List<Sprite> sprites_food;
     [SerializeField] List<Sprite> sprites_entertainment;
     [SerializeField] List<Sprite> sprites_diaper;
+
+    [SerializeField] List<Sprite> sprites_crying;
 
     [SerializeField] SpriteRenderer sprite_renderer_food;
     [SerializeField] SpriteRenderer sprite_renderer_entertainment;
@@ -38,6 +46,8 @@ public class Baby : MonoBehaviour
     //*********************************************************
 
     void Start() {
+
+        mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
         Initialize();
     }
 
@@ -52,6 +62,8 @@ public class Baby : MonoBehaviour
         speed_food = 1.0f;
         speed_entertainment = 1.0f;
         speed_diaper = 1.0f;
+
+        timer_critical_need = 0;
 
     }
 
@@ -110,9 +122,17 @@ public class Baby : MonoBehaviour
             diaper -= speed_diaper * Time.deltaTime;
         if (diaper < 0)
             diaper = 0;
+            
+        if (CriticalNeed()) {
+            timer_critical_need -= Time.deltaTime;
+
+            if (timer_critical_need <= 0) {
+                mainGame.GameOver();
+            }
+        }
     }
 
-    public bool critical_need() {
+    public bool CriticalNeed() {
         return (food <= 0 || entertainment <= 0 || diaper <= 0) ;
     }
 
