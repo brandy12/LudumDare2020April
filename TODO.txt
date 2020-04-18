@@ -20,9 +20,9 @@ Ce qu'il reste à faire
 
 - manque un tutorial avec explication quelle touche fait quoi
 - le jeu est trop dur.
-	- Déjà parce qu'on voit mal les bébés sur le fond noir
+	- On voit mal les bébés sur le fond noir
 	- Les jauges descendent trop vite peut-être
-- le jeu n'est pas amusant
+- le jeu n'est pas hyper fun
 	- Trop facile de changer les couches
 	- Trop d'âmes qui flottent
 - le jeu est pas très juicy
