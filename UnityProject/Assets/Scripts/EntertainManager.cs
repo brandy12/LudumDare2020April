@@ -15,6 +15,8 @@ public class EntertainManager : MonoBehaviour
     string input;
     int counterLetter;
 
+    public bool IsOn { get => isOn; set => isOn = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +32,11 @@ public class EntertainManager : MonoBehaviour
             Debug.Log("entertain");
             Reset();
             InitializeSequence();
-            isOn = true;
+            IsOn = true;
             songCanvas.alpha = 1;
         }
 
-        if (isOn)
+        if (IsOn)
         {
             foreach (char c in Input.inputString)
             {
@@ -58,6 +60,7 @@ public class EntertainManager : MonoBehaviour
                     Reset(); 
                     songCanvas.alpha = 0;
                     Debug.Log("done");
+                    IsOn = false;
                 }
             }
         }
@@ -77,11 +80,11 @@ public class EntertainManager : MonoBehaviour
         {
             if (i == 0)
             {
-                currentSequence += wordArray[Random.Range(0, wordArray.Length)];
+                currentSequence += wordArray[UnityEngine.Random.Range(0, wordArray.Length)];
             }
             else
             {
-                currentSequence += " " + wordArray[Random.Range(0, wordArray.Length)];
+                currentSequence += " " + wordArray[UnityEngine.Random.Range(0, wordArray.Length)];
             }
         }
 
