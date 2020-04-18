@@ -63,7 +63,7 @@ public class Baby : MonoBehaviour
         speed_entertainment = 1.0f;
         speed_diaper = 1.0f;
 
-        timer_critical_need = 0;
+        timer_critical_need = duration_critical_need;
 
     }
 
@@ -109,26 +109,28 @@ public class Baby : MonoBehaviour
 
     void BarsManagement() {
         if(food>0)
-            food -= speed_food * Time.deltaTime;
+            food -= speed_food * Time.deltaTime * Random.Range(0.0f, 3.0f);
         if (food < 0)
             food = 0;
             
         if (entertainment > 0)
-            entertainment -= speed_entertainment * Time.deltaTime;
+            entertainment -= speed_entertainment * Time.deltaTime * Random.Range(0.0f, 3.0f);
         if (entertainment < 0)
             entertainment = 0;
 
         if (diaper > 0)
-            diaper -= speed_diaper * Time.deltaTime;
+            diaper -= speed_diaper * Time.deltaTime * Random.Range(0.0f, 3.0f);
         if (diaper < 0)
             diaper = 0;
-            
+
         if (CriticalNeed()) {
             timer_critical_need -= Time.deltaTime;
 
             if (timer_critical_need <= 0) {
                 mainGame.GameOver();
             }
+        } else {
+            timer_critical_need = duration_critical_need;
         }
     }
 
