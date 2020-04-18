@@ -12,6 +12,12 @@ public class MainGame : MonoBehaviour {
 
     float speed_life;// number of life decreasing by second (when a baby is in critical need)
 
+    float speed_pentagram; // speed at which the pentagram fills
+
+    float timeSurvived; // time during which the player has survived
+
+    bool playing; // true if a level is currently being played. False when level is finished / not begun
+
     [SerializeField] Pentagram pentagram;
 
     //*********************************************************
@@ -24,6 +30,7 @@ public class MainGame : MonoBehaviour {
     [SerializeField] Transform babies;
     [SerializeField] Baby baby_prefab;
     [SerializeField] Transform baby_highlight;
+    [SerializeField] GameObject start_menu;
 
     //*********************************************************
     //          SOUL VARIABLES
@@ -50,6 +57,9 @@ public class MainGame : MonoBehaviour {
         // (to be called when trying to replay)
 
         life = 100.0f;
+        speed_pentagram = 5f;
+        timeSurvived = 0f;
+        playing = false;
 
         number_babies = 1;
         id_selected_baby = 0;
@@ -58,11 +68,28 @@ public class MainGame : MonoBehaviour {
 
     }
 
+    public void BeginLevel(int _number_babies)
+    {
+        start_menu.SetActive(false);
+
+        number_babies = _number_babies;
+        id_selected_baby = 0;
+
+        timeSurvived = 0f;
+
+        playing = true;
+
+        BabiesGeneration();
+    }
+
     void Update() {
-        InputsManagement();
-        LifeManagement();
-        BabyHighlightManagement();
-        UIManagement();
+        if (playing)
+        {
+            InputsManagement();
+            LifeManagement();
+            BabyHighlightManagement();
+            UIManagement();
+        }
     }
 
 
@@ -118,7 +145,18 @@ public class MainGame : MonoBehaviour {
 
     void UIManagement() {
         //Pentagram
-        pentagram.SetScale(life);
+
+        if (life > 0) // check that we didn't lose
+        {
+            timeSurvived += Time.deltaTime * speed_pentagram;
+            pentagram.SetScale(timeSurvived);
+            if (timeSurvived >= 100f)
+            {
+                DestroyBabies();
+                BeginLevel(number_babies + 1);
+                Debug.Log("finished level");
+            }
+        }
     }
 
     //*********************************************************
@@ -224,6 +262,16 @@ public class MainGame : MonoBehaviour {
     void BabyHighlightManagement() {
         baby_highlight.transform.position = PositionPentagram(id_selected_baby, number_babies);
     }
+
+    public void DestroyBabies()
+    {
+        foreach (Transform t in babies)
+        {
+            Destroy(t.gameObject);
+        }
+
+    }
+
 
     //*********************************************************
     //          GAME FUNCTIONS
