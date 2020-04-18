@@ -8,7 +8,7 @@ public class MainGame : MonoBehaviour {
     //          MOTHER VARIABLES
     //*********************************************************
 
-    float life;//0 = dead, 100= total life
+    public float life;//0 = dead, 100= total life
 
     float speed_life;// number of life decreasing by second (when a baby is in critical need)
 
@@ -19,7 +19,7 @@ public class MainGame : MonoBehaviour {
     //*********************************************************
 
     int number_babies;
-    int id_selected_baby;
+    public int id_selected_baby;
 
     [SerializeField] Transform babies;
     [SerializeField] Baby baby_prefab;
@@ -51,7 +51,7 @@ public class MainGame : MonoBehaviour {
 
         life = 100.0f;
 
-        number_babies = 5;
+        number_babies = 1;
         id_selected_baby = 0;
 
         BabiesGeneration();
@@ -88,23 +88,28 @@ public class MainGame : MonoBehaviour {
         }
 
         //actions
-        if (selected_baby != null) {
+        
+        if (SelectedBaby() != null) {
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 if (counter_souls > 0) {
                     counter_souls--;
-                    selected_baby.GiveFood();
+                    SelectedBaby().GiveFood();
                 } else {
                     //no more food
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
-                selected_baby.ChangeDiaper();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3)) {
-                selected_baby.Entertain();
+                SelectedBaby().ChangeDiaper();
             }
         }
 
+    }
+
+    public void Entertain() {
+
+        if (SelectedBaby() != null) {
+            SelectedBaby().Entertain();
+        }
     }
 
     //*********************************************************
@@ -191,7 +196,7 @@ public class MainGame : MonoBehaviour {
 
         alpha -= 90.0f;
         alpha *= Mathf.PI / 180.0f;
-        return new Vector3(Mathf.Cos(alpha), Mathf.Sin(alpha), 0)*2.0f;
+        return new Vector3(Mathf.Cos(alpha), Mathf.Sin(alpha), 0)*3.0f;
     }
 
 
@@ -199,14 +204,13 @@ public class MainGame : MonoBehaviour {
     //          BABY SELECTION
     //*********************************************************
 
-    public Baby selected_baby {
-        get {
-            foreach (Transform t in babies) {
-                if (t.GetComponent<Baby>().id == id_selected_baby)
-                    return t.GetComponent<Baby>();
+    public Baby SelectedBaby() {
+        foreach (Transform t in babies) {
+            if (t.GetComponent<Baby>().id == id_selected_baby) {
+                return t.GetComponent<Baby>();
             }
-            return null;
         }
+        return null;
     }
 
     public bool BabyInCriticalNeed() {

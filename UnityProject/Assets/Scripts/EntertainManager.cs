@@ -61,6 +61,7 @@ public class EntertainManager : MonoBehaviour
                     songCanvas.alpha = 0;
                     Debug.Log("done");
                     IsOn = false;
+                    GameObject.Find("MainGame").GetComponent<MainGame>().Entertain();
                 }
             }
         }

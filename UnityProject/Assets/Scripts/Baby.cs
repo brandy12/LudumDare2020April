@@ -43,9 +43,7 @@ public class Baby : MonoBehaviour
 
     public void Initialize() {
         // initialize variables for the beginning of the party
-        // (to be called when trying to replay)
-
-        id = -1; // -1 means undefined id
+        // (to be called when trying to replay
 
         food = 50;
         entertainment = 50;
