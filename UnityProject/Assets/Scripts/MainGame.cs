@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGame : MonoBehaviour
-{
+public class MainGame : MonoBehaviour {
 
+    //*********************************************************
+    //          MOTHER VARIABLES
+    //*********************************************************
+
+    float life;//0 = dead, 100= total life
+
+    float speed_life;// number of life decreasing by second (when a baby is in critical need)
+
+    [SerializeField] Pentagram pentagram;
 
     //*********************************************************
     //          BABY VARIABLES
@@ -20,15 +28,14 @@ public class MainGame : MonoBehaviour
     //*********************************************************
     //          ACTIONS VARIABLES
     //*********************************************************
-    
+
 
 
     //*********************************************************
     //          UNITY FUNCTIONS
     //*********************************************************
 
-    void Start()
-    {
+    void Start() {
         Initialize();
     }
 
@@ -36,16 +43,20 @@ public class MainGame : MonoBehaviour
         // initialize variables for the beginning of the party
         // (to be called when trying to replay)
 
+        life = 100.0f;
+
         number_babies = 5;
         id_selected_baby = 0;
 
         BabiesGeneration();
 
     }
-    
-    void Update()
-    {
+
+    void Update() {
         InputsManagement();
+        LifeManagement();
+
+        pentagram.SetScale(Engine.LinearInterpolation(Mathf.Cos(Time.time), -1, 1, 0, 100));
     }
 
 
@@ -85,6 +96,19 @@ public class MainGame : MonoBehaviour
 
     }
 
+    //*********************************************************
+    //          LIFE MANAGEMENT
+    //*********************************************************
+
+    void LifeManagement(){
+        if (BabyInCriticalNeed()) {
+            life -= speed_life * Time.deltaTime;
+
+            if (life <= 0) {
+                GameOver();
+            }
+        }
+    }
 
     //*********************************************************
     //          BABIES GENERATION
@@ -114,5 +138,22 @@ public class MainGame : MonoBehaviour
             }
             return null;
         }
+    }
+
+    public bool BabyInCriticalNeed() {
+        foreach (Transform t in Babies) {
+            if (t.GetComponent<Baby>().critical_need())
+                return true;
+        }
+        return false;
+    }
+
+
+    //*********************************************************
+    //          GAME FUNCTIONS
+    //*********************************************************
+
+    void GameOver() {
+        //...
     }
 }
