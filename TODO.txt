@@ -11,3 +11,5 @@ Prog
 -mécanisme de la main + handle human number when feeding 
 -chanson: texte
 -background animated
+-gestion sprite pleure
+-gestion life avancée

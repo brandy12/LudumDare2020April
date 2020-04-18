@@ -29,7 +29,7 @@ public class MainGame : MonoBehaviour {
     //          SOUL VARIABLES
     //*********************************************************
 
-    int counter_souls;
+    public int counter_souls;
 
     //*********************************************************
     //          ACTIONS VARIABLES
@@ -62,8 +62,7 @@ public class MainGame : MonoBehaviour {
         InputsManagement();
         LifeManagement();
         BabyHighlightManagement();
-
-        pentagram.SetScale(Engine.LinearInterpolation(Mathf.Cos(Time.time), -1, 1, 0, 100));
+        UIManagement();
     }
 
 
@@ -91,7 +90,12 @@ public class MainGame : MonoBehaviour {
         //actions
         if (selected_baby != null) {
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
-                selected_baby.GiveFood();
+                if (counter_souls > 0) {
+                    counter_souls--;
+                    selected_baby.GiveFood();
+                } else {
+                    //no more food
+                }
             }
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
                 selected_baby.ChangeDiaper();
@@ -101,6 +105,15 @@ public class MainGame : MonoBehaviour {
             }
         }
 
+    }
+
+    //*********************************************************
+    //          UI MANAGEMENT
+    //*********************************************************
+
+    void UIManagement() {
+        //Pentagram
+        pentagram.SetScale(life);
     }
 
     //*********************************************************

@@ -12,9 +12,9 @@ public class Baby : MonoBehaviour
     //*********************************************************
 
     //bars from 0 to 100. 0 means completely unsatisfied, 100 means totally satisfied
-    float food;
-    float entertainment;
-    float diaper;
+    public float food;
+    public float entertainment;
+    public float diaper;
 
     //amount of bars decreasing by second
     float speed_food;

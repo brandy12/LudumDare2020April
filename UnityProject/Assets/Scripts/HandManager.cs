@@ -43,7 +43,8 @@ public class HandManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Soul")
         {
-            //mainGame.counter_souls++;
+            mainGame.counter_souls++;
+            collision.GetComponent<Soul>().Grab();
         }
     }
 }
