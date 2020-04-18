@@ -1,0 +1,36 @@
+Dans l'ordre de priorité
+
+Bébé
+	- corps du bébé
+	- 3 bouches
+	- 3 oreilles
+	- 3 couches
+	- yeux normaux + yeux en pleurs
+	- surbrillance Bébé sélectionné
+
+UI
+	- pentagramme rempli
+	- pentagramme vide
+
+
+Ecran Titre, Game Over et Success (Priorité)
+	- crédit
+	- Titre
+	- Bouton et text "Play", "Return"
+	- Texte "Game Over", "Success"
+	- Texte "Round 1", "Round 2" ... "Round 5"
+
+Background
+	- harpes
+
+
+Main
+	- animation idle
+	- animation grab
+
+Âmes
+	- sprite ou animation idle
+
+Incantation latine
+	- Font de l'incantation latine
+	- note de musique qui sortent des harpes (une ou deux notes différentes)

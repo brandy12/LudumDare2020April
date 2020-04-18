@@ -4,9 +4,7 @@ Prog
 ****************************
 
 -change sprite depending on baby's gauges
--mother's score -> baby death
 -penta sprite management -> timer plutôt que life
 -canvas handling of game over and title screen 
 -background animated
 -gestion sprite pleure
--gestion life avancée
