@@ -1,0 +1,13 @@
+
+****************************
+Prog
+****************************
+
+-change sprite depending on baby's gauges
+-mother's score
+-penta sprite management
+-canvas handling of game over and title screen
+-génération des humains
+-mécanisme de la main + handle human number when feeding 
+-chanson: texte
+-background animated

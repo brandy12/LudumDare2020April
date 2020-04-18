@@ -21,9 +21,15 @@ public class MainGame : MonoBehaviour {
     int number_babies;
     int id_selected_baby;
 
-    [SerializeField] Transform Babies;
+    [SerializeField] Transform babies;
     [SerializeField] Baby baby_prefab;
+    [SerializeField] Transform baby_highlight;
 
+    //*********************************************************
+    //          SOUL VARIABLES
+    //*********************************************************
+
+    int counter_souls;
 
     //*********************************************************
     //          ACTIONS VARIABLES
@@ -55,6 +61,7 @@ public class MainGame : MonoBehaviour {
     void Update() {
         InputsManagement();
         LifeManagement();
+        BabyHighlightManagement();
 
         pentagram.SetScale(Engine.LinearInterpolation(Mathf.Cos(Time.time), -1, 1, 0, 100));
     }
@@ -118,11 +125,60 @@ public class MainGame : MonoBehaviour {
         for (int i = 0; i < number_babies; ++i) {
             Baby b = Baby.Instantiate(baby_prefab);
 
-            b.transform.SetParent(Babies, false);
+            b.transform.SetParent(babies, false);
             b.SetId(i);
-            b.transform.position = Vector3.zero;
+            b.transform.position = PositionPentagram(i, number_babies);
 
         }
+    }
+
+    Vector3 PositionPentagram(float index, float total) {
+        float alpha=0;
+
+        if (total == 1) {
+            alpha = 0;
+        } else if (total == 2) {
+            if (index == 0)
+                alpha = -72 * 2;
+            if (index == 1)
+                alpha = 72 * 2;
+        } else if (total == 3) {
+
+            if (index == 0)
+                alpha = 0;
+            if (index == 1)
+                alpha = 72 * 2;
+            if (index == 2)
+                alpha = -72 * 2;
+        } else if (total == 4) {
+
+            if (index == 0)
+                alpha = -72;
+            if (index == 1)
+                alpha = 72;
+            if (index == 2)
+                alpha = 72*2;
+            if (index == 3)
+                alpha = -72 * 2;
+        } else if (total == 5) {
+            if (index == 0)
+                alpha = 0;
+            if (index == 1)
+                alpha = 72;
+            if (index == 2)
+                alpha = 72 * 2;
+            if (index == 3)
+                alpha = 72 * 3;
+            if (index == 4)
+                alpha = 72 * 4;
+
+        } else {
+            Debug.LogError("Error : the argument total of the function PositionPentagram has an inconsistent value (" + total + ").");
+        }
+
+        alpha -= 90.0f;
+        alpha *= Mathf.PI / 180.0f;
+        return new Vector3(Mathf.Cos(alpha), Mathf.Sin(alpha), 0)*2.0f;
     }
 
 
@@ -132,7 +188,7 @@ public class MainGame : MonoBehaviour {
 
     public Baby selected_baby {
         get {
-            foreach (Transform t in Babies) {
+            foreach (Transform t in babies) {
                 if (t.GetComponent<Baby>().id == id_selected_baby)
                     return t.GetComponent<Baby>();
             }
@@ -141,13 +197,16 @@ public class MainGame : MonoBehaviour {
     }
 
     public bool BabyInCriticalNeed() {
-        foreach (Transform t in Babies) {
+        foreach (Transform t in babies) {
             if (t.GetComponent<Baby>().critical_need())
                 return true;
         }
         return false;
     }
 
+    void BabyHighlightManagement() {
+        baby_highlight.transform.position = PositionPentagram(id_selected_baby, number_babies);
+    }
 
     //*********************************************************
     //          GAME FUNCTIONS
