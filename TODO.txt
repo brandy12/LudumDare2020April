@@ -1,10 +1,35 @@
+----------------------------------------------
+Ce qui a été fait
+----------------------------------------------
 
-****************************
-Prog
-****************************
+En principe, le jeu est jouable. On peut intéragir avec les bébés, ils 
+changent d'apparence en fonction de leur besoin. Il peut y avoir
+game over ou succès si on survit aux 5 rounds.
 
--change sprite depending on baby's gauges
--penta sprite management -> timer plutôt que life
--canvas handling of game over and title screen 
--background animated
--gestion sprite pleure
+La redescente de la main a été ralenti et il est maintenant impossible
+au joueur de lancer la main avant qu'elle ne soit revenue.
+
+Le joueur peut maintenant interrompte la chanson qu'il était en train
+d'écrire s'il lance une autre action.
+
+Le background est animé, la main aussi.
+
+----------------------------------------------
+Ce qu'il reste à faire
+----------------------------------------------
+
+- manque un tutorial avec explication quelle touche fait quoi
+- le jeu est trop dur.
+	- Déjà parce qu'on voit mal les bébés sur le fond noir
+	- Les jauges descendent trop vite peut-être
+- le jeu n'est pas amusant
+	- Trop facile de changer les couches
+	- Trop d'âmes qui flottent
+- le jeu est pas très juicy
+	- Manque des effets visuel et sonore quand on attrape une âme, nourrit un bébé,
+	lui change les couches, lui chante une chanson. Peut-être ajouter des tremblements
+	aux bébés quand on intéragit avec.
+	- Manque d'animation ? Animer le texte quand on le tappe ? Animer des éléments du décor ?
+- manque compteur d'âmes sur la main
+- manque encore des assets (menu titre, game over etc. + harpes)
+- manque sons et musiques

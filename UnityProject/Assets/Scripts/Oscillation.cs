@@ -20,7 +20,7 @@ public class Oscillation : MonoBehaviour
         seed = Random.value * 1000;
 
         z = transform.position.z;
-        radius = 5.0f;
+        radius = 0.3f;
     }
 
     // Update is called once per frame

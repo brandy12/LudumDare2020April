@@ -41,6 +41,8 @@ public class Baby : MonoBehaviour
     [SerializeField] SpriteRenderer sprite_renderer_entertainment;
     [SerializeField] SpriteRenderer sprite_renderer_diaper;
 
+    [SerializeField] SpriteRenderer sprite_renderer_crying;
+
     //*********************************************************
     //          UNITY FUNCTIONS
     //*********************************************************
@@ -65,6 +67,8 @@ public class Baby : MonoBehaviour
 
         timer_critical_need = duration_critical_need;
 
+        
+
     }
 
     void Update() {
@@ -86,20 +90,21 @@ public class Baby : MonoBehaviour
     //*********************************************************
 
     void SpritesManagement() {
+    
 
-        /*
-        
-        to activate when sprites are ready
-
-        int index_sprite_food = Mathf.FloorToInt(Engine.LinearInterpolation(food, 0, 100, 0, sprites_food.Count - 1));
-        int index_sprite_entertainment = Mathf.FloorToInt(Engine.LinearInterpolation(entertainment, 0, 100, 0, sprites_entertainment.Count - 1));
-        int index_sprite_diaper = Mathf.FloorToInt(Engine.LinearInterpolation(diaper, 0, 100, 0, sprites_diaper.Count - 1));
+        int index_sprite_food = Mathf.FloorToInt(Engine.LinearInterpolation(food, 0, 100, 0, sprites_food.Count));
+        int index_sprite_entertainment = Mathf.FloorToInt(Engine.LinearInterpolation(entertainment, 0, 100, 0, sprites_entertainment.Count));
+        int index_sprite_diaper = Mathf.FloorToInt(Engine.LinearInterpolation(diaper, 0, 100, 0, sprites_diaper.Count));
 
         sprite_renderer_food.sprite = sprites_food[index_sprite_food];
         sprite_renderer_entertainment.sprite = sprites_entertainment[index_sprite_entertainment];
         sprite_renderer_diaper.sprite = sprites_diaper[index_sprite_diaper];
-        
-         */
+
+        if(CriticalNeed())
+            sprite_renderer_crying.sprite = sprites_crying[0];
+        else
+            sprite_renderer_crying.sprite = sprites_crying[1];        
+         
 
     }
 
@@ -114,12 +119,12 @@ public class Baby : MonoBehaviour
             food = 0;
             
         if (entertainment > 0)
-            entertainment -= speed_entertainment * Time.deltaTime * Random.Range(0.0f, 3.0f);
+            entertainment -= speed_entertainment * Time.deltaTime * Random.Range(0.0f, 10.0f);
         if (entertainment < 0)
             entertainment = 0;
 
         if (diaper > 0)
-            diaper -= speed_diaper * Time.deltaTime * Random.Range(0.0f, 3.0f);
+            diaper -= speed_diaper * Time.deltaTime * Random.Range(0.0f, 10.0f);
         if (diaper < 0)
             diaper = 0;
 

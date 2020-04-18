@@ -36,6 +36,10 @@ public class Animation2D {
         timer = graine;
     }
 
+    public void Initialize() {
+        timer = graine;
+    }
+
     //************************************************************************************************************************
     //**************************************          EVOLUTION FONCTION       ***********************************************
     //************************************************************************************************************************
@@ -43,7 +47,7 @@ public class Animation2D {
         timer = graine;
     }
 
-    public bool evolve(float time_factor) {
+    public bool evolve(float time_factor=1.0f) {
         timer += Time.deltaTime * time_factor;
 
         int current = 0;

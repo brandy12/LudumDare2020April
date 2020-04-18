@@ -8,17 +8,20 @@ public class MainGame : MonoBehaviour {
     //          MOTHER VARIABLES
     //*********************************************************
 
-    public float life;//0 = dead, 100= total life
-
-    float speed_life;// number of life decreasing by second (when a baby is in critical need)
-
-    float speed_pentagram; // speed at which the pentagram fills
-
     float timeSurvived; // time during which the player has survived
+    float durationLevel = 30; //duration in second of a level
 
     bool playing; // true if a level is currently being played. False when level is finished / not begun
 
     [SerializeField] Pentagram pentagram;
+
+    //*********************************************************
+    //          MENU VARIABLES
+    //*********************************************************
+
+    [SerializeField] GameObject start_menu;
+    [SerializeField] GameObject game_over_menu;
+    [SerializeField] GameObject victory_menu;
 
     //*********************************************************
     //          BABY VARIABLES
@@ -30,7 +33,6 @@ public class MainGame : MonoBehaviour {
     [SerializeField] Transform babies;
     [SerializeField] Baby baby_prefab;
     [SerializeField] Transform baby_highlight;
-    [SerializeField] GameObject start_menu;
 
     //*********************************************************
     //          SOUL VARIABLES
@@ -38,10 +40,17 @@ public class MainGame : MonoBehaviour {
 
     public int counter_souls;
 
+    [SerializeField] Transform souls;
+
     //*********************************************************
     //          ACTIONS VARIABLES
     //*********************************************************
 
+    [SerializeField] HandManager hand_manager;
+
+    //*********************************************************
+    //          ANIMATIONS
+    //*********************************************************
 
 
     //*********************************************************
@@ -49,6 +58,9 @@ public class MainGame : MonoBehaviour {
     //*********************************************************
 
     void Start() {
+
+        hand_manager = GameObject.Find("Hand").GetComponent<HandManager>();
+
         Initialize();
     }
 
@@ -56,8 +68,10 @@ public class MainGame : MonoBehaviour {
         // initialize variables for the beginning of the party
         // (to be called when trying to replay)
 
-        life = 100.0f;
-        speed_pentagram = 5f;
+        start_menu.SetActive(true);
+        game_over_menu.SetActive(false);
+        victory_menu.SetActive(false);
+
         timeSurvived = 0f;
         playing = false;
 
@@ -65,6 +79,12 @@ public class MainGame : MonoBehaviour {
         id_selected_baby = 0;
 
         BabiesGeneration();
+
+        hand_manager.Initialize();
+
+        foreach (Transform t in souls) {
+            Destroy(t.gameObject);
+        }
 
     }
 
@@ -80,15 +100,22 @@ public class MainGame : MonoBehaviour {
         playing = true;
 
         BabiesGeneration();
+
+        hand_manager.Initialize();
+
+        foreach (Transform t in souls) {
+            Destroy(t.gameObject);
+        }
     }
 
     void Update() {
         if (playing)
         {
             InputsManagement();
-            LifeManagement();
+            TimeManagement();
             BabyHighlightManagement();
             UIManagement();
+            AnimationsManagement();
         }
     }
 
@@ -145,31 +172,20 @@ public class MainGame : MonoBehaviour {
 
     void UIManagement() {
         //Pentagram
-
-        if (life > 0) // check that we didn't lose
-        {
-            timeSurvived += Time.deltaTime * speed_pentagram;
-            pentagram.SetScale(timeSurvived);
-            if (timeSurvived >= 100f)
-            {
-                DestroyBabies();
-                BeginLevel(number_babies + 1);
-                Debug.Log("finished level");
-            }
-        }
+        pentagram.SetScale(timeSurvived/durationLevel*100.0f);
+        
     }
 
     //*********************************************************
-    //          LIFE MANAGEMENT
+    //          TIME MANAGEMENT
     //*********************************************************
 
-    void LifeManagement(){
-        if (BabyInCriticalNeed()) {
-            life -= speed_life * Time.deltaTime;
-
-            if (life <= 0) {
-                GameOver();
-            }
+    void TimeManagement() {
+        timeSurvived += Time.deltaTime;
+        pentagram.SetScale(timeSurvived);
+        if (timeSurvived >= durationLevel) {
+            BeginLevel(number_babies + 1);
+            Debug.Log("finished level");
         }
     }
 
@@ -178,6 +194,9 @@ public class MainGame : MonoBehaviour {
     //*********************************************************
 
     void BabiesGeneration() {
+
+        DestroyBabies();
+
         for (int i = 0; i < number_babies; ++i) {
             Baby b = Baby.Instantiate(baby_prefab);
 
@@ -274,10 +293,30 @@ public class MainGame : MonoBehaviour {
 
 
     //*********************************************************
+    //          ANIMATIONS
+    //*********************************************************
+
+    void AnimationsManagement() {
+        
+    }
+
+
+    //*********************************************************
     //          GAME FUNCTIONS
     //*********************************************************
 
     public void GameOver() {
-        //...
+
+        playing = false;
+
+        game_over_menu.SetActive(true);
+    }
+
+
+    public void Victory() {
+
+        playing = false;
+
+        victory_menu.SetActive(true);
     }
 }

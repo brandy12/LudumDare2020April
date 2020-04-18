@@ -29,7 +29,6 @@ public class EntertainManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Debug.Log("entertain");
             Reset();
             InitializeSequence();
             IsOn = true;
@@ -38,6 +37,13 @@ public class EntertainManager : MonoBehaviour
 
         if (IsOn)
         {
+            //if another action is activated, it stops the song
+            if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2)) {
+                Reset();
+                songCanvas.alpha = 0;
+                IsOn = false;
+            }
+
             foreach (char c in Input.inputString)
             {
                 if (c == currentSequence[counterLetter])
@@ -59,7 +65,6 @@ public class EntertainManager : MonoBehaviour
                 {
                     Reset(); 
                     songCanvas.alpha = 0;
-                    Debug.Log("done");
                     IsOn = false;
                     GameObject.Find("MainGame").GetComponent<MainGame>().Entertain();
                 }
