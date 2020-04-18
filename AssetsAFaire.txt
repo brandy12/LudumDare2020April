@@ -34,3 +34,5 @@ Main
 Incantation latine
 	- Font de l'incantation latine
 	- note de musique qui sortent des harpes (une ou deux notes différentes)
+
+Symbole/Bulle pour indiquer le besoin du bébé.
