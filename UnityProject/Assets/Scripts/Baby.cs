@@ -22,6 +22,18 @@ public class Baby : MonoBehaviour
     float speed_diaper;
 
     //*********************************************************
+    //          SPRITE VARIABLES
+    //*********************************************************
+
+    [SerializeField] List<Sprite> sprites_food;
+    [SerializeField] List<Sprite> sprites_entertainment;
+    [SerializeField] List<Sprite> sprites_diaper;
+
+    [SerializeField] SpriteRenderer sprite_renderer_food;
+    [SerializeField] SpriteRenderer sprite_renderer_entertainment;
+    [SerializeField] SpriteRenderer sprite_renderer_diaper;
+
+    //*********************************************************
     //          UNITY FUNCTIONS
     //*********************************************************
 
@@ -47,6 +59,7 @@ public class Baby : MonoBehaviour
 
     void Update() {
         BarsManagement();
+        SpritesManagement();
     }
 
 
@@ -56,6 +69,28 @@ public class Baby : MonoBehaviour
 
     public void SetId(int _id) {
         id = _id;
+    }
+
+    //*********************************************************
+    //          BARS FUNCTIONS
+    //*********************************************************
+
+    void SpritesManagement() {
+
+        /*
+        
+        to activate when sprites are ready
+
+        int index_sprite_food = Mathf.FloorToInt(Engine.LinearInterpolation(food, 0, 100, 0, sprites_food.Count - 1));
+        int index_sprite_entertainment = Mathf.FloorToInt(Engine.LinearInterpolation(entertainment, 0, 100, 0, sprites_entertainment.Count - 1));
+        int index_sprite_diaper = Mathf.FloorToInt(Engine.LinearInterpolation(diaper, 0, 100, 0, sprites_diaper.Count - 1));
+
+        sprite_renderer_food.sprite = sprites_food[index_sprite_food];
+        sprite_renderer_entertainment.sprite = sprites_entertainment[index_sprite_entertainment];
+        sprite_renderer_diaper.sprite = sprites_diaper[index_sprite_diaper];
+        
+         */
+
     }
 
     //*********************************************************
@@ -79,7 +114,7 @@ public class Baby : MonoBehaviour
             diaper = 0;
     }
 
-    bool critical_need() {
+    public bool critical_need() {
         return (food <= 0 || entertainment <= 0 || diaper <= 0) ;
     }
 
