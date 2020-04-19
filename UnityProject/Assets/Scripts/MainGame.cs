@@ -125,7 +125,7 @@ public class MainGame : MonoBehaviour {
         is_harp_broken = false;
 
         foreach (Transform t in souls) {
-            Destroy(t.gameObject);
+            //Destroy(t.gameObject);
         }
     }
 
@@ -168,7 +168,6 @@ public class MainGame : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 if (counter_souls > 0) {
                     SelectedBaby().GiveFood();
-                    audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.eating);
                 } else {
                     //no more food
                     SelectedBaby().GetComponent<Trembling>().Tremble();
@@ -177,7 +176,6 @@ public class MainGame : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
                 if (dirty_diapers < capacity_basket) {
                     SelectedBaby().ChangeDiaper();
-                    audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.changeDiaper);
                 } else {
                     //no more place in the basket
                     SelectedBaby().GetComponent<Trembling>().Tremble();
@@ -187,7 +185,6 @@ public class MainGame : MonoBehaviour {
             {
                 if (!is_harp_broken) {
                     SelectedBaby().Entertain();
-                    audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.playHarp);
                 } else {
                     //harp broken
                     SelectedBaby().GetComponent<Trembling>().Tremble();
@@ -205,10 +202,17 @@ public class MainGame : MonoBehaviour {
     }
 
     public void TuneHarp() {
+        if (is_harp_broken) {
+            //play sound
+        }
         is_harp_broken = false;
     }
 
     public void EmptyBasket() {
+        if (dirty_diapers > 0) {
+
+            audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.basketEmpty);
+        }
         dirty_diapers = 0;
     }
 

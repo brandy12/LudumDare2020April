@@ -25,7 +25,7 @@ public class Note : MonoBehaviour
 
         alpha *= Mathf.PI / 180.0f;
 
-        trajectory = new Vector3(Mathf.Cos(alpha), Mathf.Sin(alpha), 0)*0.05f;
+        trajectory = new Vector3(Mathf.Cos(alpha), Mathf.Sin(alpha), 0)*0.1f;
     }
 
     // Update is called once per frame
@@ -44,7 +44,7 @@ public class Note : MonoBehaviour
         trajectory *= 0.99f;
 
         float period = 0.8f;
-        Vector3 perturbation = new Vector3(0, Mathf.Cos(Time.time * 2 * Mathf.PI / period+seed), 0)*0.08f;
+        Vector3 perturbation = new Vector3(0, Mathf.Cos(Time.time * 2 * Mathf.PI / period+seed), 0)*0.1f;
 
         transform.position += trajectory + perturbation;
     }

@@ -15,6 +15,9 @@ public class Baby : MonoBehaviour
 
     AudioManager audioManager;
 
+    bool is_mouse_hover;
+    [SerializeField] SpriteRenderer sprite_mouse_hover;
+
     //*********************************************************
     //          BARS VARIABLES
     //*********************************************************
@@ -88,13 +91,14 @@ public class Baby : MonoBehaviour
 
         timer_critical_need = duration_critical_need;
 
-        
+        is_mouse_hover = false;
 
     }
 
     void Update() {
         BarsManagement();
         SpritesManagement();
+        MouseHoverManagement();
     }
 
 
@@ -187,6 +191,7 @@ public class Baby : MonoBehaviour
             diaper = 100;
             mainGame.dirty_diapers++;
             trembling_component.Tremble("y");
+            audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.changeDiaper);
         } else {
             trembling_component.Tremble();
         }
@@ -197,6 +202,7 @@ public class Baby : MonoBehaviour
             food = 100;
             mainGame.counter_souls--;
             trembling_component.Tremble("y");
+            audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.eating);
         } else {
             trembling_component.Tremble();
         }
@@ -207,6 +213,7 @@ public class Baby : MonoBehaviour
             entertainment = 100;
             trembling_component.Tremble("y");
             mainGame.GenerateNotes();
+            audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.playHarp);
             if (Random.value < mainGame.probability_harp_breaks) {
                 mainGame.is_harp_broken = true;
                 audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.harpBroken);
@@ -225,4 +232,17 @@ public class Baby : MonoBehaviour
     public bool IsBored() {
         return Mathf.FloorToInt(Engine.LinearInterpolation(entertainment, 0, 100, 0, sprites_entertainment.Count)) != sprites_entertainment.Count - 1;
     }
+
+
+
+    void MouseHoverManagement() {
+
+        if (is_mouse_hover) {
+            sprite_mouse_hover.gameObject.SetActive(true);
+        }else{
+            sprite_mouse_hover.gameObject.SetActive(false);
+        }
+    }
+
+    
 }

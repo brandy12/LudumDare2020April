@@ -12,6 +12,10 @@ public class Basket : MonoBehaviour
     [SerializeField] List<Sprite> sprites_basket;
     [SerializeField] SpriteRenderer sprite_renderer;
 
+
+    bool is_mouse_hover;
+    [SerializeField] SpriteRenderer sprite_mouse_hover;
+
     AudioManager audioManager;
 
     // Start is called before the first frame update
@@ -21,8 +25,9 @@ public class Basket : MonoBehaviour
 
         btn.onClick.AddListener(() => {
             mainGame.EmptyBasket();
-            audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.basketEmpty);
         });
+
+        is_mouse_hover = false;
     }
 
     // Update is called once per frame
@@ -42,5 +47,17 @@ public class Basket : MonoBehaviour
 
         sprite_renderer.sprite = sprites_basket[index];
 
+        MouseHoverManagement();
+    }
+
+
+
+    void MouseHoverManagement() {
+
+        if (is_mouse_hover) {
+            sprite_mouse_hover.gameObject.SetActive(true);
+        } else {
+            sprite_mouse_hover.gameObject.SetActive(false);
+        }
     }
 }
