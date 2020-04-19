@@ -57,13 +57,13 @@ public class Baby : MonoBehaviour
         // initialize variables for the beginning of the party
         // (to be called when trying to replay
 
-        food = 50;
-        entertainment = 50;
-        diaper = 50;
+        food = UnityEngine.Random.Range(75f, 100f);
+        entertainment = UnityEngine.Random.Range(35f, 100f);
+        diaper = UnityEngine.Random.Range(35f, 100f);
 
-        speed_food = 1.0f;
-        speed_entertainment = 1.0f;
-        speed_diaper = 1.0f;
+        speed_food = UnityEngine.Random.Range(0.8f, 1.2f);
+        speed_entertainment = UnityEngine.Random.Range(0.8f, 1.2f);
+        speed_diaper = UnityEngine.Random.Range(0.8f, 1.2f);
 
         timer_critical_need = duration_critical_need;
 
