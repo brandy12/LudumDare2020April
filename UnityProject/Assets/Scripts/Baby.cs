@@ -13,6 +13,8 @@ public class Baby : MonoBehaviour
     [SerializeField] Button btn;
     Trembling trembling_component;
 
+    AudioManager audioManager;
+
     //*********************************************************
     //          BARS VARIABLES
     //*********************************************************
@@ -47,11 +49,18 @@ public class Baby : MonoBehaviour
     [SerializeField] SpriteRenderer sprite_renderer_crying;
 
     //*********************************************************
+    //          SOUND VARIABLES
+    //*********************************************************
+
+    bool playCryingSound = false;
+
+    //*********************************************************
     //          UNITY FUNCTIONS
     //*********************************************************
 
     void Start() {
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         trembling_component = GetComponent<Trembling>();
 
         btn.onClick.AddListener(() => {
@@ -112,11 +121,24 @@ public class Baby : MonoBehaviour
         sprite_renderer_entertainment.sprite = sprites_entertainment[index_sprite_entertainment];
         sprite_renderer_diaper.sprite = sprites_diaper[index_sprite_diaper];
 
-        if(CriticalNeed())
+        if (CriticalNeed())
+        {
             sprite_renderer_crying.sprite = sprites_crying[0];
+            if (playCryingSound)
+            {
+                playCryingSound = false;
+                GetComponent<AudioSource>().clip = audioManager.babyCry[Random.Range(0, audioManager.babyCry.Length)];
+                GetComponent<AudioSource>().Play();
+            }
+        }
         else
-            sprite_renderer_crying.sprite = sprites_crying[1];        
-         
+        {
+            GetComponent<AudioSource>().Stop();
+            sprite_renderer_crying.sprite = sprites_crying[1];
+            playCryingSound = true;
+        }
+
+
 
     }
 
@@ -187,6 +209,7 @@ public class Baby : MonoBehaviour
             mainGame.GenerateNotes();
             if (Random.value < mainGame.probability_harp_breaks) {
                 mainGame.is_harp_broken = true;
+                audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.harpBroken);
             }
         } else {
             trembling_component.Tremble();

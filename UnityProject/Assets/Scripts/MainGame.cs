@@ -52,6 +52,7 @@ public class MainGame : MonoBehaviour {
     [SerializeField] int incantation_counter; // increases when player writes correct incantation text
     IncantationManager incantationManager;
     [SerializeField] GameObject basket;
+    AudioManager audioManager;
 
     public int Incantation_counter { get => incantation_counter; set => incantation_counter = value; }
 
@@ -74,6 +75,7 @@ public class MainGame : MonoBehaviour {
 
         hand_manager = GameObject.Find("Hand").GetComponent<HandManager>();
         incantationManager = GameObject.Find("Incantation Manager").GetComponent<IncantationManager>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         Initialize();
     }
@@ -165,6 +167,7 @@ public class MainGame : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 if (counter_souls > 0) {
                     SelectedBaby().GiveFood();
+                    audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.eating);
                 } else {
                     //no more food
                     SelectedBaby().GetComponent<Trembling>().Tremble();
@@ -173,6 +176,7 @@ public class MainGame : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
                 if (dirty_diapers < capacity_basket) {
                     SelectedBaby().ChangeDiaper();
+                    audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.changeDiaper);
                 } else {
                     //no more place in the basket
                     SelectedBaby().GetComponent<Trembling>().Tremble();
@@ -182,7 +186,7 @@ public class MainGame : MonoBehaviour {
             {
                 if (!is_harp_broken) {
                     SelectedBaby().Entertain();
-
+                    audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.playHarp);
                 } else {
                     //harp broken
                     SelectedBaby().GetComponent<Trembling>().Tremble();

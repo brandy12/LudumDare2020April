@@ -25,6 +25,7 @@ public class Soul : MonoBehaviour
     [SerializeField] SpriteRenderer sprite_renderer;
 
     Animation2D anim_idle;
+    AudioManager audioManager;
 
     //*********************************************************
     //          UNITY FUNCTIONS
@@ -36,9 +37,12 @@ public class Soul : MonoBehaviour
 
         anim_idle = new Animation2D("soul_idle", sprites_idle, 1.0f, true);
 
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
         btn.onClick.AddListener(() => {
             mainGame.counter_souls++;
             Grab();
+            audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.soul);
         });
 
         speed = speed * Random.Range(0.7f, 1.3f);

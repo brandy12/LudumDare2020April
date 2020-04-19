@@ -12,13 +12,16 @@ public class Basket : MonoBehaviour
     [SerializeField] List<Sprite> sprites_basket;
     [SerializeField] SpriteRenderer sprite_renderer;
 
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start() {
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         btn.onClick.AddListener(() => {
             mainGame.EmptyBasket();
+            audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.basketEmpty);
         });
     }
 
