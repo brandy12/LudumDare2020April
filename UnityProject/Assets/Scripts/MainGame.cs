@@ -22,6 +22,7 @@ public class MainGame : MonoBehaviour {
     [SerializeField] GameObject start_menu;
     [SerializeField] GameObject game_over_menu;
     [SerializeField] GameObject victory_menu;
+    [SerializeField] GameObject tuto_menu;
 
     //*********************************************************
     //          BABY VARIABLES
@@ -49,6 +50,7 @@ public class MainGame : MonoBehaviour {
     [SerializeField] HandManager hand_manager;
     [SerializeField] int incantation_counter; // increases when player writes correct incantation text
     IncantationManager incantationManager;
+    [SerializeField] GameObject basket;
 
     public int Incantation_counter { get => incantation_counter; set => incantation_counter = value; }
 
@@ -82,17 +84,20 @@ public class MainGame : MonoBehaviour {
         start_menu.SetActive(true);
         game_over_menu.SetActive(false);
         victory_menu.SetActive(false);
+        tuto_menu.SetActive(false);
         
         playing = false;
         
         id_selected_baby = 0;
-        
 
+        basket.SetActive(false);
     }
 
     public void BeginLevel(int _number_babies)
     {
         start_menu.SetActive(false);
+
+        basket.SetActive(true);
 
         number_babies = _number_babies;
         id_selected_baby = 0;
@@ -211,6 +216,7 @@ public class MainGame : MonoBehaviour {
         pentagram.SetScale(incantation_counter/durationLevel*100.0f);
         
     }
+
 
     //*********************************************************
     //          TIME MANAGEMENT
@@ -359,5 +365,17 @@ public class MainGame : MonoBehaviour {
         playing = false;
 
         victory_menu.SetActive(true);
+    }
+
+    public void DisplayTuto()
+    {
+        tuto_menu.SetActive(true);
+        start_menu.SetActive(false);
+    }
+
+    public void DisplayStartMenu()
+    {
+        tuto_menu.SetActive(false);
+        start_menu.SetActive(true);
     }
 }

@@ -343,6 +343,7 @@ MonoBehaviour:
   start_menu: {fileID: 1160653381}
   game_over_menu: {fileID: 403539278}
   victory_menu: {fileID: 1906819376}
+  tuto_menu: {fileID: 1936159039}
   id_selected_baby: 0
   babies: {fileID: 1833037669}
   baby_prefab: {fileID: 4403343462726267755, guid: decdf666c8ab63a48a0af8972e0f407e,
@@ -352,8 +353,10 @@ MonoBehaviour:
   souls: {fileID: 1246465234}
   hand_manager: {fileID: 489508103}
   incantation_counter: 0
+  basket: {fileID: 1284797917}
   dirty_diapers: 0
   capacity_basket: 5
+  probability_harp_breaks: 0.2
   is_harp_broken: 0
 --- !u!4 &191644445
 Transform:
@@ -2296,7 +2299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3114,7 +3117,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 191644444}
-        m_MethodName: 
+        m_MethodName: DisplayTuto
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4046,7 +4049,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2028904892}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 191644444}
+        m_MethodName: DisplayStartMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2028904892
 MonoBehaviour:
   m_ObjectHideFlags: 0
