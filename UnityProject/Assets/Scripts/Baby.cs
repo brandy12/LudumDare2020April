@@ -11,6 +11,7 @@ public class Baby : MonoBehaviour
     MainGame mainGame;
 
     [SerializeField] Button btn;
+    Trembling trembling_component;
 
     //*********************************************************
     //          BARS VARIABLES
@@ -51,6 +52,7 @@ public class Baby : MonoBehaviour
 
     void Start() {
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
+        trembling_component = GetComponent<Trembling>();
 
         btn.onClick.AddListener(() => {
             mainGame.SelectBaby(id);
@@ -163,7 +165,7 @@ public class Baby : MonoBehaviour
             diaper = 100;
             mainGame.dirty_diapers++;
         } else {
-
+            trembling_component.Tremble();
         }
     }
 
@@ -172,7 +174,7 @@ public class Baby : MonoBehaviour
             food = 100;
             mainGame.counter_souls--;
         } else {
-
+            trembling_component.Tremble();
         }
     }
 
@@ -183,7 +185,7 @@ public class Baby : MonoBehaviour
                 mainGame.is_harp_broken = true;
             }
         } else {
-
+            trembling_component.Tremble();
         }
     }
 

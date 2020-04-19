@@ -16,6 +16,16 @@ public class Soul : MonoBehaviour
 
     float period_x, period_y, seed;
 
+
+    //*********************************************************
+    //          ANIMATION
+    //*********************************************************
+
+    [SerializeField] List<Sprite> sprites_idle;
+    [SerializeField] SpriteRenderer sprite_renderer;
+
+    Animation2D anim_idle;
+
     //*********************************************************
     //          UNITY FUNCTIONS
     //*********************************************************
@@ -23,6 +33,8 @@ public class Soul : MonoBehaviour
     void Start()
     {
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
+
+        anim_idle = new Animation2D("soul_idle", sprites_idle, 1.0f, true);
 
         btn.onClick.AddListener(() => {
             mainGame.counter_souls++;
@@ -44,6 +56,9 @@ public class Soul : MonoBehaviour
         if ((transform.position).magnitude > 100.0f) {
             Destroy(gameObject);
         }
+
+        //anim_idle.evolve();
+        //sprite_renderer.sprite = anim_idle.currentSprite();
     }
 
 
