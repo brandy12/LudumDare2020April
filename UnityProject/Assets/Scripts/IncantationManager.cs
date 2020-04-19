@@ -125,7 +125,7 @@ public class IncantationManager : MonoBehaviour
         textDisplay.text = currentSequence;
     }
 
-    void NextSentence()
+    public void NextSentence()
     {
         Reset();
         currentSequence = sentenceArray[UnityEngine.Random.Range(0, sentenceArray.Length)];
