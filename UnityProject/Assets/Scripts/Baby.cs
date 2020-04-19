@@ -65,6 +65,10 @@ public class Baby : MonoBehaviour
         speed_entertainment = UnityEngine.Random.Range(0.8f, 1.2f);
         speed_diaper = UnityEngine.Random.Range(0.8f, 1.2f);
 
+        //speed_food = 0f;
+        //speed_entertainment = 0f;
+        //speed_diaper = 0f;
+
         timer_critical_need = duration_critical_need;
 
         

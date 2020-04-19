@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class HandManager : MonoBehaviour
 {
-    EntertainManager entertainManager;
     MainGame mainGame;
     
 
@@ -36,7 +35,7 @@ public class HandManager : MonoBehaviour
 
     void Start()
     {
-        entertainManager = GameObject.Find("Entertainment Manager").GetComponent<EntertainManager>();
+        //entertainManager = GameObject.Find("Entertainment Manager").GetComponent<IncantationManager>();
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
         initialPos = transform.position;
 
@@ -57,10 +56,11 @@ public class HandManager : MonoBehaviour
         //inputs management
         if (state==State.open && Input.GetKeyDown(KeyCode.Space))
         {
-            if (!entertainManager.IsOn) // checking that we're not currently inputing text (and spaces)
-            {
-                StartCoroutine(HandMovement());
-            }
+            //if (!entertainManager.IsOn) // checking that we're not currently inputing text (and spaces)
+            //{
+            //    StartCoroutine(HandMovement());
+            //}
+            StartCoroutine(HandMovement());
         }
 
         //state management

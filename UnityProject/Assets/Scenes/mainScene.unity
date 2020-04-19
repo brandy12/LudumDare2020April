@@ -1022,7 +1022,7 @@ GameObject:
   - component: {fileID: 431356127}
   - component: {fileID: 431356126}
   m_Layer: 5
-  m_Name: Song Canvas
+  m_Name: Incantation Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1477,7 +1477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &690086699
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1567,8 +1567,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1128.7, y: 197}
+  m_AnchoredPosition: {x: -3.3, y: -453}
+  m_SizeDelta: {x: 1697, y: 197}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &756307401
 MonoBehaviour:
@@ -1590,7 +1590,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 90
+    m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2245,7 +2245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1248314817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2338,7 +2338,7 @@ GameObject:
   - component: {fileID: 1322535230}
   - component: {fileID: 1322535229}
   m_Layer: 0
-  m_Name: Entertainment Manager
+  m_Name: Incantation Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2479,6 +2479,7 @@ MonoBehaviour:
   counter_souls: 0
   souls: {fileID: 672671118}
   hand_manager: {fileID: 1171897098}
+  incantation_counter: 0
 --- !u!4 &1401335498
 Transform:
   m_ObjectHideFlags: 0
@@ -2805,7 +2806,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1731324775
 MonoBehaviour:
   m_ObjectHideFlags: 0

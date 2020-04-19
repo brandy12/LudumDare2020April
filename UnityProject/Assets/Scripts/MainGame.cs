@@ -9,7 +9,7 @@ public class MainGame : MonoBehaviour {
     //*********************************************************
 
     float timeSurvived; // time during which the player has survived
-    float durationLevel = 30; //duration in second of a level
+    float durationLevel = 100; //duration in number of characters 
 
     bool playing; // true if a level is currently being played. False when level is finished / not begun
 
@@ -47,6 +47,9 @@ public class MainGame : MonoBehaviour {
     //*********************************************************
 
     [SerializeField] HandManager hand_manager;
+    [SerializeField] int incantation_counter; // increases when player writes correct incantation text
+
+    public int Incantation_counter { get => incantation_counter; set => incantation_counter = value; }
 
     //*********************************************************
     //          ANIMATIONS
@@ -82,6 +85,8 @@ public class MainGame : MonoBehaviour {
 
         hand_manager.Initialize();
 
+        Incantation_counter = 0;
+
         foreach (Transform t in souls) {
             Destroy(t.gameObject);
         }
@@ -102,6 +107,11 @@ public class MainGame : MonoBehaviour {
         BabiesGeneration();
 
         hand_manager.Initialize();
+        counter_souls = 0;
+
+        incantation_counter = 0;
+
+        durationLevel = 30 + (number_babies * 30);
 
         foreach (Transform t in souls) {
             Destroy(t.gameObject);
@@ -172,7 +182,8 @@ public class MainGame : MonoBehaviour {
 
     void UIManagement() {
         //Pentagram
-        pentagram.SetScale(timeSurvived/durationLevel*100.0f);
+        //pentagram.SetScale(timeSurvived/durationLevel*100.0f);
+        pentagram.SetScale(incantation_counter/durationLevel*100.0f);
         
     }
 
@@ -181,9 +192,9 @@ public class MainGame : MonoBehaviour {
     //*********************************************************
 
     void TimeManagement() {
-        timeSurvived += Time.deltaTime;
-        pentagram.SetScale(timeSurvived);
-        if (timeSurvived >= durationLevel) {
+        //timeSurvived += Time.deltaTime;
+        //pentagram.SetScale(timeSurvived);
+        if (incantation_counter >= durationLevel) {
             BeginLevel(number_babies + 1);
             Debug.Log("finished level");
         }
