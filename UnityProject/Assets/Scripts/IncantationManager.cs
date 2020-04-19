@@ -8,6 +8,9 @@ public class IncantationManager : MonoBehaviour
     [SerializeField] Text textDisplay;
     [SerializeField] CanvasGroup songCanvas;
 
+    List<string> sequence;
+    int counter_sequence;
+
     string[] sentenceArray = new string[] { 
         "lorem ipsum dolor sit",
         "consectetur adipiscing elit",
@@ -50,7 +53,9 @@ public class IncantationManager : MonoBehaviour
     void Start()
     {
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
-        NextSentence();
+        NewSequence();
+        //NextSentence();
+        sequence = new List<string>();
         //songCanvas.alpha = 0;
     }
 
@@ -108,7 +113,7 @@ public class IncantationManager : MonoBehaviour
         textDisplay.text = currentSequence;
     }
 
-    void InitializeSequence()
+    /*void InitializeSequence()
     {
         for (int i = 0; i < maxWords; i++)
         {
@@ -123,12 +128,23 @@ public class IncantationManager : MonoBehaviour
         }
 
         textDisplay.text = currentSequence;
-    }
+    }*/
 
     public void NextSentence()
     {
         Reset();
-        currentSequence = sentenceArray[UnityEngine.Random.Range(0, sentenceArray.Length)];
+        currentSequence = sequence[counter_sequence];
         textDisplay.text = currentSequence;
+    }
+
+    public void NewSequence() {
+        //choose 5 sentences randomly
+
+        sequence.Clear();
+
+        for (int i = 0; i < 5; ++i) {
+            sequence.Add(sentenceArray[UnityEngine.Random.Range(0, sentenceArray.Length)]);
+        }
+        counter_sequence = 0;
     }
 }
