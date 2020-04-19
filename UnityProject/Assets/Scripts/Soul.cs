@@ -14,7 +14,7 @@ public class Soul : MonoBehaviour
     Vector3 direction;
     Vector3 trajectory;
 
-    float period_y, seed;
+    float period_x, period_y, seed;
 
     //*********************************************************
     //          UNITY FUNCTIONS
@@ -32,6 +32,7 @@ public class Soul : MonoBehaviour
         speed = speed * Random.Range(0.7f, 1.3f);
         trajectory = transform.position;
         
+        period_x = Random.Range(6.0f,8.0f);
         period_y = Random.Range(6.0f,8.0f);
         seed = Random.value*1000;
     }
@@ -39,6 +40,10 @@ public class Soul : MonoBehaviour
     void Update()
     {
         MovementManagement();
+
+        if ((transform.position).magnitude > 100.0f) {
+            Destroy(gameObject);
+        }
     }
 
 
@@ -49,7 +54,7 @@ public class Soul : MonoBehaviour
     void MovementManagement() {
         trajectory += direction * speed * Time.deltaTime;
         transform.position = trajectory + new Vector3(
-                                                        0,
+                                                        Mathf.Cos(Time.time * 2 * Mathf.PI / period_x + seed),
                                                         Mathf.Sin(Time.time * 2 * Mathf.PI / period_y + seed),
                                                         0) * 0.3f;
     }
@@ -58,11 +63,7 @@ public class Soul : MonoBehaviour
         direction = dir.normalized;
         Vector3 s = transform.localScale;
 
-        if (direction.x > 0) {
-            transform.localScale = new Vector3(-s.x, s.y, s.z);
-        } else {
-            transform.localScale = new Vector3(s.x, s.y, s.z);
-        }
+        
     }
 
     //*********************************************************

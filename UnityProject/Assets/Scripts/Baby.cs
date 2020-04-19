@@ -159,14 +159,41 @@ public class Baby : MonoBehaviour
     //*********************************************************
 
     public void ChangeDiaper() {
-        diaper = 100;
+        if (IsDirty()) {
+            diaper = 100;
+            mainGame.dirty_diapers++;
+        } else {
+
+        }
     }
 
     public void GiveFood() {
-        food = 100;
+        if (IsHungry()) {
+            food = 100;
+            mainGame.counter_souls--;
+        } else {
+
+        }
     }
 
     public void Entertain() {
-        entertainment = 100;
+        if (IsBored()) {
+            entertainment = 100;
+            if (Random.value < mainGame.probability_harp_breaks) {
+                mainGame.is_harp_broken = true;
+            }
+        } else {
+
+        }
+    }
+
+    public bool IsDirty() {
+        return Mathf.FloorToInt(Engine.LinearInterpolation(diaper, 0, 100, 0, sprites_diaper.Count))!= sprites_diaper.Count-1;
+    }
+    public bool IsHungry() {
+        return Mathf.FloorToInt(Engine.LinearInterpolation(food, 0, 100, 0, sprites_food.Count)) != sprites_food.Count - 1;
+    }
+    public bool IsBored() {
+        return Mathf.FloorToInt(Engine.LinearInterpolation(entertainment, 0, 100, 0, sprites_entertainment.Count)) != sprites_entertainment.Count - 1;
     }
 }

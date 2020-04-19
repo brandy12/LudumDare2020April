@@ -55,7 +55,7 @@ public class MainGame : MonoBehaviour {
     public int dirty_diapers;
     public int capacity_basket = 5;
 
-    float probability_harp_breaks = 0.2f;
+    public float probability_harp_breaks = 0.2f;
     public bool is_harp_broken;
 
     //*********************************************************
@@ -158,18 +158,18 @@ public class MainGame : MonoBehaviour {
         if (SelectedBaby() != null) {
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 if (counter_souls > 0) {
-                    counter_souls--;
                     SelectedBaby().GiveFood();
                 } else {
                     //no more food
+                    SelectedBaby().GetComponent<Trembling>().Tremble();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
                 if (dirty_diapers < capacity_basket) {
                     SelectedBaby().ChangeDiaper();
-                    dirty_diapers++;
                 } else {
                     //no more place in the basket
+                    SelectedBaby().GetComponent<Trembling>().Tremble();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -177,11 +177,9 @@ public class MainGame : MonoBehaviour {
                 if (!is_harp_broken) {
                     SelectedBaby().Entertain();
 
-                    if (Random.value < probability_harp_breaks) {
-                        is_harp_broken = true;
-                    }
                 } else {
                     //harp broken
+                    SelectedBaby().GetComponent<Trembling>().Tremble();
                 }
             }
         }
