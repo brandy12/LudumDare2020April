@@ -5,8 +5,6 @@ using UnityEngine;
 public class SoulsGenerator : MonoBehaviour
 {
 
-    [SerializeField] Vector3 direction;
-
     [SerializeField] Transform souls;
     [SerializeField] Soul soul_prefab;
 
@@ -38,6 +36,9 @@ public class SoulsGenerator : MonoBehaviour
 
         Vector3 perturbation = new Vector3(0, Random.Range(-1.0f, 1.0f), 0);
         s.transform.position = transform.position + perturbation;
+
+        float alpha = Random.value * 1000;
+        Vector3 direction = new Vector3(Mathf.Cos(alpha), Mathf.Sin(alpha), 0);
 
         s.SetDirection(direction);
     }
