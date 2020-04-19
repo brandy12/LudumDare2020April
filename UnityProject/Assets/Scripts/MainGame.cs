@@ -112,7 +112,7 @@ public class MainGame : MonoBehaviour {
         hand_manager.Initialize();
         counter_souls = 0;
 
-        incantationManager.NextSentence();
+        incantationManager.NewSequence();
         incantation_counter = 0;
 
         durationLevel = 30 + (number_babies * 30);
@@ -217,7 +217,8 @@ public class MainGame : MonoBehaviour {
     void UIManagement() {
         //Pentagram
         //pentagram.SetScale(timeSurvived/durationLevel*100.0f);
-        pentagram.SetScale(incantation_counter/durationLevel*100.0f);
+        //pentagram.SetScale(incantation_counter/durationLevel*100.0f);
+        pentagram.SetScale(incantationManager.PercentageCompleted());
         
     }
 
@@ -229,7 +230,8 @@ public class MainGame : MonoBehaviour {
     void TimeManagement() {
         //timeSurvived += Time.deltaTime;
         //pentagram.SetScale(timeSurvived);
-        if (incantation_counter >= durationLevel) {
+        
+        if (incantationManager.PercentageCompleted()>=100.0f) {
             BeginLevel(number_babies + 1);
             Debug.Log("finished level");
         }

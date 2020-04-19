@@ -45,6 +45,7 @@ public class IncantationManager : MonoBehaviour
     bool isOn = true;
     string input;
     int counterLetter;
+    int counterLetterTotal;
     MainGame mainGame;
 
     public bool IsOn { get => isOn; set => isOn = value; }
@@ -85,6 +86,7 @@ public class IncantationManager : MonoBehaviour
                 {
                     
                     counterLetter++;
+                    counterLetterTotal++;
                     mainGame.Incantation_counter++;
                 }
                 //else if (c == 8)
@@ -133,6 +135,11 @@ public class IncantationManager : MonoBehaviour
     public void NextSentence()
     {
         Reset();
+
+        counter_sequence++;
+        if (counter_sequence >= sequence.Count) {
+            return;
+        }
         currentSequence = sequence[counter_sequence];
         textDisplay.text = currentSequence;
     }
@@ -140,11 +147,31 @@ public class IncantationManager : MonoBehaviour
     public void NewSequence() {
         //choose 5 sentences randomly
 
+        Reset();
+
+        counterLetterTotal = 0;
+
+        sequence = new List<string>();
         sequence.Clear();
 
         for (int i = 0; i < 5; ++i) {
             sequence.Add(sentenceArray[UnityEngine.Random.Range(0, sentenceArray.Length)]);
         }
         counter_sequence = 0;
+        
+        currentSequence = sequence[counter_sequence];
+        textDisplay.text = currentSequence;
+    }
+
+    public float PercentageCompleted() {
+        if (sequence != null && sequence.Count > 0) {
+            int sum = 0;
+            for (int i = 0; i < sequence.Count; ++i) {
+                sum += sequence[i].Length;
+            }
+
+            return (float)counterLetterTotal / (float)sum * 100.0f;
+        }
+        return 0;
     }
 }
