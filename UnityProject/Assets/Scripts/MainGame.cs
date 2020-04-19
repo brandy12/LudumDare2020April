@@ -115,6 +115,7 @@ public class MainGame : MonoBehaviour {
         counter_souls = 0;
 
         incantationManager.NewSequence();
+        incantationManager.GetComponent<AudioSource>().Stop();
         incantation_counter = 0;
 
         durationLevel = 30 + (number_babies * 30);

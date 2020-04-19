@@ -48,6 +48,8 @@ public class IncantationManager : MonoBehaviour
     int counterLetterTotal;
     MainGame mainGame;
 
+    float counterAudio = 0f;
+
     public bool IsOn { get => isOn; set => isOn = value; }
 
     // Start is called before the first frame update
@@ -71,6 +73,12 @@ public class IncantationManager : MonoBehaviour
         //    songCanvas.alpha = 1;
         //}
 
+        Debug.Log(GetComponent<AudioSource>().isPlaying);
+        counterAudio -= Time.deltaTime * 2f;
+        if (counterAudio <= 0f)
+        {
+            GetComponent<AudioSource>().Pause();
+        }
         if (IsOn)
         {
             //if another action is activated, it stops the song
@@ -84,7 +92,11 @@ public class IncantationManager : MonoBehaviour
             {
                 if (c == currentSequence[counterLetter])
                 {
-                    
+                    counterAudio = 2f;
+                    if (!GetComponent<AudioSource>().isPlaying)
+                    {
+                        GetComponent<AudioSource>().Play();
+                    }
                     counterLetter++;
                     counterLetterTotal++;
                     mainGame.Incantation_counter++;
