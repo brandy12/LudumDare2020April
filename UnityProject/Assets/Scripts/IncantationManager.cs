@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class IncantationManager : MonoBehaviour
 {
@@ -73,11 +74,11 @@ public class IncantationManager : MonoBehaviour
         //    songCanvas.alpha = 1;
         //}
 
-        Debug.Log(GetComponent<AudioSource>().isPlaying);
         counterAudio -= Time.deltaTime * 2f;
         if (counterAudio <= 0f)
         {
-            GetComponent<AudioSource>().Pause();
+            //GetComponent<AudioSource>().Pause();
+            GetComponent<AudioSource>().DOFade(0.2f, 1f);
         }
         if (IsOn)
         {
@@ -93,6 +94,7 @@ public class IncantationManager : MonoBehaviour
                 if (c == currentSequence[counterLetter])
                 {
                     counterAudio = 2f;
+                    GetComponent<AudioSource>().DOFade(1f, 1f);
                     if (!GetComponent<AudioSource>().isPlaying)
                     {
                         GetComponent<AudioSource>().Play();
