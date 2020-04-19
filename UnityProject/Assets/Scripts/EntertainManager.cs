@@ -10,7 +10,7 @@ public class EntertainManager : MonoBehaviour
 
     string[] wordArray = new string[] { "lorem", "ipsum", "dolor", "sit" };
     string currentSequence = "";
-    int maxWords = 2;
+    int maxWords = 1;
     bool isOn = false;
     string input;
     int counterLetter;
