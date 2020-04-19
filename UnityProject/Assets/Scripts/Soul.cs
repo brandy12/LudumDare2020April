@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Soul : MonoBehaviour
 {
+
+    MainGame mainGame;
+
+    [SerializeField] Button btn;
 
     float speed = 1.0f;
     Vector3 direction;
@@ -17,6 +22,13 @@ public class Soul : MonoBehaviour
 
     void Start()
     {
+        mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
+
+        btn.onClick.AddListener(() => {
+            mainGame.counter_souls++;
+            Grab();
+        });
+
         speed = speed * Random.Range(0.7f, 1.3f);
         trajectory = transform.position;
         

@@ -272,6 +272,11 @@ public class MainGame : MonoBehaviour {
     //          BABY SELECTION
     //*********************************************************
 
+    public void SelectBaby(int id) {
+        id_selected_baby = id;
+    }
+
+
     public Baby SelectedBaby() {
         foreach (Transform t in babies) {
             if (t.GetComponent<Baby>().id == id_selected_baby) {

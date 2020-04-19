@@ -53,6 +53,10 @@ public class HandManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+
+
         //inputs management
         if (state==State.open && Input.GetKeyDown(KeyCode.Space))
         {
@@ -60,11 +64,12 @@ public class HandManager : MonoBehaviour
             //{
             //    StartCoroutine(HandMovement());
             //}
-            StartCoroutine(HandMovement());
+            
+            //StartCoroutine(HandMovement());
         }
 
         //state management
-        if (state == State.open) {
+        /*if (state == State.open) {
             if ((new Vector2(transform.position.x, transform.position.y)-targetPos).magnitude < threshold) {
                 state = State.closed;
             }
@@ -72,21 +77,23 @@ public class HandManager : MonoBehaviour
             if ((new Vector2(transform.position.x, transform.position.y) - initialPos).magnitude < threshold) {
                 state=State.open;
             }
-        }
+        }*/
 
         //animations management
-        if (state == State.open) {
+        if (Input.GetMouseButton(0)) {
+            state = State.closed;
+            sprite_renderer_hand.sprite = sprite_hand_closed;
+        }else {
+            state = State.open;
             anim_hand_idle.evolve();
             sprite_renderer_hand.sprite = anim_hand_idle.currentSprite();
 
-        } else if (state == State.closed) {
-            sprite_renderer_hand.sprite = sprite_hand_closed;
         }
 
         textCollectedSouls.text = "x" + mainGame.counter_souls.ToString();
     }
 
-    IEnumerator HandMovement()
+    /*IEnumerator HandMovement()
     {
         transform.DOMove(targetPos, 0.1f).SetEase(Ease.Linear);
         yield return new WaitForSeconds(0.1f);
@@ -100,5 +107,5 @@ public class HandManager : MonoBehaviour
             mainGame.counter_souls++;
             collision.GetComponent<Soul>().Grab();
         }
-    }
+    }*/
 }

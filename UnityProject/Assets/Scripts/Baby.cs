@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Baby : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Baby : MonoBehaviour
 
     MainGame mainGame;
 
+    [SerializeField] Button btn;
 
     //*********************************************************
     //          BARS VARIABLES
@@ -48,8 +50,13 @@ public class Baby : MonoBehaviour
     //*********************************************************
 
     void Start() {
-
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
+
+        btn.onClick.AddListener(() => {
+            Debug.Log("Select Baby " + id);
+            mainGame.SelectBaby(id);
+        });
+
         Initialize();
     }
 
