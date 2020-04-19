@@ -31,7 +31,6 @@ public class Trembling : MonoBehaviour
     }
 
     public void Tremble(string _type="x") {
-        position_initial = transform.position;
         type = _type;
 
         is_trembling = true;
