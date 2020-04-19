@@ -28,6 +28,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] Sprite sprite_hand_closed;
 
     [SerializeField] SpriteRenderer sprite_renderer_hand;
+    [SerializeField] Text textCollectedSouls; // displays number of collected souls
 
     //*********************************************************
     //          UNITY FUNCTIONS
@@ -81,6 +82,8 @@ public class HandManager : MonoBehaviour
         } else if (state == State.closed) {
             sprite_renderer_hand.sprite = sprite_hand_closed;
         }
+
+        textCollectedSouls.text = "x" + mainGame.counter_souls.ToString();
     }
 
     IEnumerator HandMovement()
