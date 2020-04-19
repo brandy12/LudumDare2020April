@@ -48,6 +48,7 @@ public class MainGame : MonoBehaviour {
 
     [SerializeField] HandManager hand_manager;
     [SerializeField] int incantation_counter; // increases when player writes correct incantation text
+    IncantationManager incantationManager;
 
     public int Incantation_counter { get => incantation_counter; set => incantation_counter = value; }
 
@@ -63,6 +64,7 @@ public class MainGame : MonoBehaviour {
     void Start() {
 
         hand_manager = GameObject.Find("Hand").GetComponent<HandManager>();
+        incantationManager = GameObject.Find("Incantation Manager").GetComponent<IncantationManager>();
 
         Initialize();
     }
@@ -109,6 +111,7 @@ public class MainGame : MonoBehaviour {
         hand_manager.Initialize();
         counter_souls = 0;
 
+        incantationManager.NextSentence();
         incantation_counter = 0;
 
         durationLevel = 30 + (number_babies * 30);
@@ -164,6 +167,10 @@ public class MainGame : MonoBehaviour {
             }
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
                 SelectedBaby().ChangeDiaper();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                SelectedBaby().Entertain();
             }
         }
 
