@@ -88,7 +88,7 @@ public class IncantationManager : MonoBehaviour
                 //}
                 
                 input = currentSequence.Substring(0, counterLetter);
-                string coloredText = "<color=red>" + input + "</color>";
+                string coloredText = "<color=#D61616>" + input + "</color>";
                 string tmp2 = currentSequence.Substring(counterLetter, currentSequence.Length - (counterLetter));
                 textDisplay.text = coloredText + tmp2;
 

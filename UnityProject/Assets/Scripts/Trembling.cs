@@ -11,6 +11,7 @@ public class Trembling : MonoBehaviour
 
     float timer_trembling;
     float duration_trembling = 0.4f;
+    string type;
 
     float period_x, period_y, seed;
 
@@ -19,6 +20,7 @@ public class Trembling : MonoBehaviour
     {
         is_trembling = false;
         position_initial = transform.position;
+        type = "";
 
     }
 
@@ -28,8 +30,9 @@ public class Trembling : MonoBehaviour
         TremblingManagement();
     }
 
-    public void Tremble() {
+    public void Tremble(string _type="x") {
         position_initial = transform.position;
+        type = _type;
 
         is_trembling = true;
 
@@ -50,9 +53,19 @@ public class Trembling : MonoBehaviour
                 is_trembling = false;
             }
 
-            transform.position = position_initial + new Vector3(Mathf.Cos(Time.time * 2 * Mathf.PI / period_x + seed),
-                                                        0,
-                                                        0)*0.2f;
+            if (type == "x") {
+                transform.position = position_initial + new Vector3(Mathf.Cos(Time.time * 2 * Mathf.PI / period_x + seed),
+                                                            0,
+                                                            0) * 0.2f;
+            } else if (type == "xy") {
+                transform.position = position_initial + new Vector3(Mathf.Cos(Time.time * 2 * Mathf.PI / period_x + seed),
+                                                                Mathf.Sin(Time.time * 2 * Mathf.PI / period_y + seed),
+                                                                0) * 0.2f;
+            } else if (type == "y") {
+                transform.position = position_initial + new Vector3(0, 
+                                                                Mathf.Sin(Time.time * 2 * Mathf.PI / period_y + seed),
+                                                                0) * 0.2f;
+            }
         } else {
             transform.position = position_initial;
         }

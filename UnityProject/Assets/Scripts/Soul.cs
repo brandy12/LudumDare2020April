@@ -57,8 +57,8 @@ public class Soul : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //anim_idle.evolve();
-        //sprite_renderer.sprite = anim_idle.currentSprite();
+        anim_idle.evolve();
+        sprite_renderer.sprite = anim_idle.currentSprite();
     }
 
 

@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.089, y: 0.045}
-  m_SizeDelta: {x: 7.037, y: 3.93}
+  m_AnchoredPosition: {x: 0.079, y: 0.024}
+  m_SizeDelta: {x: 1.94, y: 1.639}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1214811205141029635
 CanvasRenderer:
@@ -285,7 +285,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 400
-  m_Sprite: {fileID: 21300000, guid: 43a7217789c85004fb5681174e0425cc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 65f7b626102e9164dae8c0e4d4c0f2f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -323,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 8396331847247451199}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.29355037, y: 0.29355037, z: 0.29355037}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 8396331846854403267}
   - {fileID: 7691746532234341360}
@@ -343,6 +343,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btn: {fileID: 3002654170318072898}
+  sprites_idle:
+  - {fileID: 21300000, guid: 65f7b626102e9164dae8c0e4d4c0f2f4, type: 3}
+  - {fileID: 21300000, guid: cda9f0098b0dc6a428ce3006338c4247, type: 3}
+  - {fileID: 21300000, guid: 2e204e459fbad5c4fb7497df5f67879d, type: 3}
+  - {fileID: 21300000, guid: d0c892a3cd165ab4eb9cbb162d6fcbd0, type: 3}
+  - {fileID: 21300000, guid: b1a3c0a3e939ae741962e8520fd47d25, type: 3}
+  - {fileID: 21300000, guid: 2bb5f0a691f15c644be3a6f6077ed5aa, type: 3}
+  - {fileID: 21300000, guid: 88406c339ba164441912816ca57dadec, type: 3}
+  - {fileID: 21300000, guid: bfc3011c19656924e93ddf4758a754c6, type: 3}
+  - {fileID: 21300000, guid: d32a610ba931c0b41924a709e76bfcc3, type: 3}
+  - {fileID: 21300000, guid: 26be0fd76dbdb1647aa0816ebbd2d702, type: 3}
+  - {fileID: 21300000, guid: e50ee93af85a390419acc74534863f9b, type: 3}
+  - {fileID: 21300000, guid: 386e3167f0ad5f942b3690207539982d, type: 3}
+  - {fileID: 21300000, guid: d14030366982d7648a0658b91597b275, type: 3}
+  - {fileID: 21300000, guid: 4c00713a5b6a00d428153a1165bfd6f8, type: 3}
+  - {fileID: 21300000, guid: 6b674b25ea8cb614a8aaae09b0c25631, type: 3}
+  - {fileID: 21300000, guid: b6dabd90c9c28e74d969ff4c95a9cd43, type: 3}
+  - {fileID: 21300000, guid: 7ae2ec0aa0bf8a740a424d5c9d8632ab, type: 3}
+  - {fileID: 21300000, guid: 93d1fa2850043e849a6b0eecb16de155, type: 3}
+  - {fileID: 21300000, guid: a5ccd83aa34591d41b6f23e50141dc7d, type: 3}
+  - {fileID: 21300000, guid: 0ae9f57d4604ee440a0a1c9a44fe2fef, type: 3}
+  - {fileID: 21300000, guid: 25ed0fb9c81b90d42bd96f9596457480, type: 3}
+  - {fileID: 21300000, guid: dad5e9f1f77b5174687236f1f68c9d97, type: 3}
+  - {fileID: 21300000, guid: be985423ca6315f47b2ce2fdbbbd0273, type: 3}
+  - {fileID: 21300000, guid: 69334699e0443ce41bfe88cdb942b3cd, type: 3}
+  - {fileID: 21300000, guid: 15babb997c7b2b24a9fae902a2e3095f, type: 3}
+  sprite_renderer: {fileID: 8396331846854403268}
 --- !u!61 &7001520076166536892
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -10,6 +10,9 @@ public class Harpe : MonoBehaviour
 
     Image img;
 
+    [SerializeField] Sprite sprite_normal;
+    [SerializeField] Sprite sprite_broken;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +28,9 @@ public class Harpe : MonoBehaviour
     void Update()
     {
         if (mainGame.is_harp_broken) {
-            img.color = Color.red;
+            img.sprite = sprite_broken;
         } else {
-            img.color = Color.white;
+            img.sprite = sprite_normal;
         }
     }
 }

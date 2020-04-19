@@ -164,6 +164,7 @@ public class Baby : MonoBehaviour
         if (IsDirty()) {
             diaper = 100;
             mainGame.dirty_diapers++;
+            trembling_component.Tremble("y");
         } else {
             trembling_component.Tremble();
         }
@@ -173,6 +174,7 @@ public class Baby : MonoBehaviour
         if (IsHungry()) {
             food = 100;
             mainGame.counter_souls--;
+            trembling_component.Tremble("y");
         } else {
             trembling_component.Tremble();
         }
@@ -181,6 +183,8 @@ public class Baby : MonoBehaviour
     public void Entertain() {
         if (IsBored()) {
             entertainment = 100;
+            trembling_component.Tremble("y");
+            mainGame.GenerateNotes();
             if (Random.value < mainGame.probability_harp_breaks) {
                 mainGame.is_harp_broken = true;
             }

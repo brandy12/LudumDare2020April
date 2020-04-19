@@ -14,6 +14,7 @@ public class MainGame : MonoBehaviour {
     bool playing; // true if a level is currently being played. False when level is finished / not begun
 
     [SerializeField] Pentagram pentagram;
+    [SerializeField] NotesGenerator notes_generator;
 
     //*********************************************************
     //          MENU VARIABLES
@@ -206,6 +207,9 @@ public class MainGame : MonoBehaviour {
         dirty_diapers = 0;
     }
 
+    public void GenerateNotes() {
+        notes_generator.GenerateNotes();
+    }
     //*********************************************************
     //          UI MANAGEMENT
     //*********************************************************
@@ -295,7 +299,7 @@ public class MainGame : MonoBehaviour {
 
         alpha -= 90.0f;
         alpha *= Mathf.PI / 180.0f;
-        return new Vector3(Mathf.Cos(alpha), Mathf.Sin(alpha), 0)*3.0f;
+        return pentagram.transform.position + new Vector3(Mathf.Cos(alpha), Mathf.Sin(alpha), 0)*3.0f;
     }
 
 
