@@ -52,6 +52,12 @@ public class MainGame : MonoBehaviour {
 
     public int Incantation_counter { get => incantation_counter; set => incantation_counter = value; }
 
+    public int dirty_diapers;
+    public int capacity_basket = 5;
+
+    float probability_harp_breaks = 0.2f;
+    public bool is_harp_broken;
+
     //*********************************************************
     //          ANIMATIONS
     //*********************************************************
@@ -76,22 +82,11 @@ public class MainGame : MonoBehaviour {
         start_menu.SetActive(true);
         game_over_menu.SetActive(false);
         victory_menu.SetActive(false);
-
-        timeSurvived = 0f;
+        
         playing = false;
-
-        number_babies = 1;
+        
         id_selected_baby = 0;
-
-        BabiesGeneration();
-
-        hand_manager.Initialize();
-
-        Incantation_counter = 0;
-
-        foreach (Transform t in souls) {
-            Destroy(t.gameObject);
-        }
+        
 
     }
 
@@ -115,6 +110,10 @@ public class MainGame : MonoBehaviour {
         incantation_counter = 0;
 
         durationLevel = 30 + (number_babies * 30);
+
+        dirty_diapers = 0;
+
+        is_harp_broken = false;
 
         foreach (Transform t in souls) {
             Destroy(t.gameObject);
@@ -166,11 +165,24 @@ public class MainGame : MonoBehaviour {
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
-                SelectedBaby().ChangeDiaper();
+                if (dirty_diapers < capacity_basket) {
+                    SelectedBaby().ChangeDiaper();
+                    dirty_diapers++;
+                } else {
+                    //no more place in the basket
+                }
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                SelectedBaby().Entertain();
+                if (!is_harp_broken) {
+                    SelectedBaby().Entertain();
+
+                    if (Random.value < probability_harp_breaks) {
+                        is_harp_broken = true;
+                    }
+                } else {
+                    //harp broken
+                }
             }
         }
 
@@ -181,6 +193,14 @@ public class MainGame : MonoBehaviour {
         if (SelectedBaby() != null) {
             SelectedBaby().Entertain();
         }
+    }
+
+    public void TuneHarp() {
+        is_harp_broken = false;
+    }
+
+    public void EmptyBasket() {
+        dirty_diapers = 0;
     }
 
     //*********************************************************

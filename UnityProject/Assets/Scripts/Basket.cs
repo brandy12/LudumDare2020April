@@ -7,6 +7,7 @@ public class Basket : MonoBehaviour
 {
     MainGame mainGame;
     [SerializeField] Button btn;
+    [SerializeField] Text txt;
 
 
     // Start is called before the first frame update
@@ -14,13 +15,12 @@ public class Basket : MonoBehaviour
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
 
         btn.onClick.AddListener(() => {
-            //mainGame.EmptyBasket();
-            Debug.Log("Empty Basket");
+            mainGame.EmptyBasket();
         });
     }
 
     // Update is called once per frame
     void Update() {
-
+        txt.text = mainGame.dirty_diapers + "/" + mainGame.capacity_basket;
     }
 }

@@ -53,7 +53,6 @@ public class Baby : MonoBehaviour
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
 
         btn.onClick.AddListener(() => {
-            Debug.Log("Select Baby " + id);
             mainGame.SelectBaby(id);
         });
 

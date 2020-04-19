@@ -10,7 +10,7 @@ public class Soul : MonoBehaviour
 
     [SerializeField] Button btn;
 
-    float speed = 1.0f;
+    float speed = 3.0f;
     Vector3 direction;
     Vector3 trajectory;
 
