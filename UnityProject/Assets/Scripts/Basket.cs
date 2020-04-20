@@ -60,4 +60,14 @@ public class Basket : MonoBehaviour
             sprite_mouse_hover.gameObject.SetActive(false);
         }
     }
+
+    public void MouseEnter()
+    {
+        is_mouse_hover = true;
+    }
+
+    public void MouseExit()
+    {
+        is_mouse_hover = false;
+    }
 }

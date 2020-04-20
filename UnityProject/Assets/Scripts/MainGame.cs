@@ -55,6 +55,7 @@ public class MainGame : MonoBehaviour {
     AudioManager audioManager;
 
     public int Incantation_counter { get => incantation_counter; set => incantation_counter = value; }
+    public bool Playing { get => playing; set => playing = value; }
 
     public int dirty_diapers;
     public int capacity_basket = 5;
@@ -89,11 +90,13 @@ public class MainGame : MonoBehaviour {
         victory_menu.SetActive(false);
         tuto_menu.SetActive(false);
         
-        playing = false;
+        Playing = false;
         
         id_selected_baby = 0;
 
         basket.SetActive(false);
+
+        Cursor.visible = false;
     }
 
     public void BeginLevel(int _number_babies)
@@ -107,7 +110,7 @@ public class MainGame : MonoBehaviour {
 
         timeSurvived = 0f;
 
-        playing = true;
+        Playing = true;
 
         BabiesGeneration();
 
@@ -116,6 +119,8 @@ public class MainGame : MonoBehaviour {
 
         incantationManager.NewSequence();
         incantationManager.GetComponent<AudioSource>().Stop();
+        incantationManager.GetComponent<AudioSource>().volume = 0.1f;
+        incantationManager.GetComponent<AudioSource>().Play();
         incantation_counter = 0;
 
         durationLevel = 30 + (number_babies * 30);
@@ -130,7 +135,7 @@ public class MainGame : MonoBehaviour {
     }
 
     void Update() {
-        if (playing)
+        if (Playing)
         {
             InputsManagement();
             TimeManagement();
@@ -203,6 +208,7 @@ public class MainGame : MonoBehaviour {
 
     public void TuneHarp() {
         if (is_harp_broken) {
+            audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.backInTune);
             //play sound
         }
         is_harp_broken = false;
@@ -369,7 +375,7 @@ public class MainGame : MonoBehaviour {
 
     public void GameOver() {
 
-        playing = false;
+        Playing = false;
 
         game_over_menu.SetActive(true);
     }
@@ -377,7 +383,7 @@ public class MainGame : MonoBehaviour {
 
     public void Victory() {
 
-        playing = false;
+        Playing = false;
 
         victory_menu.SetActive(true);
     }

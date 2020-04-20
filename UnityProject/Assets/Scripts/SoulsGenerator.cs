@@ -10,6 +10,7 @@ public class SoulsGenerator : MonoBehaviour
 
     float timer_generation;
 
+    MainGame mainGame;
 
     //*********************************************************
     //          UNITY FUNCTIONS
@@ -17,12 +18,16 @@ public class SoulsGenerator : MonoBehaviour
 
     void Start()
     {
+        mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
         SetNewTimer();
     }
     
     void Update()
     {
-        SoulsGeneration();
+        if (mainGame.Playing)
+        {
+            SoulsGeneration();
+        }
     }
 
 
@@ -53,6 +58,6 @@ public class SoulsGenerator : MonoBehaviour
     }
 
     void SetNewTimer() {
-        timer_generation = 5.0f  + Random.Range(-1.0f, 3.0f);
+        timer_generation = 2.0f  + Random.Range(-1.0f, 3.0f);
     }
 }
