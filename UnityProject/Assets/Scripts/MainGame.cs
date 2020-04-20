@@ -23,7 +23,8 @@ public class MainGame : MonoBehaviour {
     [SerializeField] GameObject start_menu;
     [SerializeField] GameObject game_over_menu;
     [SerializeField] GameObject victory_menu;
-    [SerializeField] GameObject tuto_menu;
+    [SerializeField] GameObject tuto_menu_1;
+    [SerializeField] GameObject tuto_menu_2;
 
     //*********************************************************
     //          BABY VARIABLES
@@ -90,7 +91,8 @@ public class MainGame : MonoBehaviour {
         start_menu.SetActive(true);
         game_over_menu.SetActive(false);
         victory_menu.SetActive(false);
-        tuto_menu.SetActive(false);
+        tuto_menu_1.SetActive(false);
+        tuto_menu_2.SetActive(false);
         
         Playing = false;
         
@@ -388,17 +390,27 @@ public class MainGame : MonoBehaviour {
         yield return new WaitForSeconds(2f);
     }
 
-    public void DisplayTuto()
+    public void DisplayTuto1()
     {
         audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.clic);
 
-        tuto_menu.SetActive(true);
+        tuto_menu_1.SetActive(true);
+        tuto_menu_2.SetActive(false);
+        start_menu.SetActive(false);
+    }
+
+    public void DisplayTuto2() {
+        audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.clic);
+
+        tuto_menu_1.SetActive(false);
+        tuto_menu_2.SetActive(true);
         start_menu.SetActive(false);
     }
 
     public void DisplayStartMenu() {
         audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.clic);
-        tuto_menu.SetActive(false);
+        tuto_menu_1.SetActive(false);
+        tuto_menu_2.SetActive(false);
         start_menu.SetActive(true);
     }
 
