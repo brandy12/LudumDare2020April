@@ -86,7 +86,7 @@ public class IncantationManager : MonoBehaviour
                 if (c == currentSequence[counterLetter])
                 {
                     counterAudio = 2f;
-                    GetComponent<AudioSource>().DOFade(1f, 1f);
+                    GetComponent<AudioSource>().DOFade(0.8f, 1f);
                     counterLetter++;
                     counterLetterTotal++;
                     mainGame.Incantation_counter++;
@@ -123,6 +123,8 @@ public class IncantationManager : MonoBehaviour
 
         counter_sequence++;
         if (counter_sequence >= sequence.Count) {
+            isOn = false;
+            StartCoroutine(mainGame.Victory());
             return;
         }
         audio_manager.GetComponent<AudioSource>().PlayOneShot(audio_manager.end_sentence);
@@ -135,6 +137,8 @@ public class IncantationManager : MonoBehaviour
         //choose 5 sentences randomly
 
         Reset();
+
+        isOn = true;
 
         counterLetterTotal = 0;
 

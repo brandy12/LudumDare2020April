@@ -105,10 +105,12 @@ public class Baby : MonoBehaviour
 
     void Update()
     {
-        BarsManagement();
-        SpritesManagement();
-        MouseHoverManagement();
-        AnimationBabyStates();
+        if (mainGame.Playing) {
+            BarsManagement();
+            SpritesManagement();
+            MouseHoverManagement();
+            AnimationBabyStates();
+        }
     }
 
     

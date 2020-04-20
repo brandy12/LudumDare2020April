@@ -101,6 +101,8 @@ public class MainGame : MonoBehaviour {
         basket.SetActive(false);
 
         Cursor.visible = false;
+
+        audioManager.GetComponent<AudioSource>().Stop();
     }
 
     public void BeginLevel(int _number_babies)
@@ -388,6 +390,8 @@ public class MainGame : MonoBehaviour {
         audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.success);
         round_manager.PlaySuccess();
         yield return new WaitForSeconds(2f);
+
+        Initialize();
     }
 
     public void DisplayTuto1()
@@ -421,8 +425,9 @@ public class MainGame : MonoBehaviour {
         StartCoroutine(TransitionLevel(1));
     }
 
-    IEnumerator TransitionLevel(int i)
-    {
+    IEnumerator TransitionLevel(int i) {
+        tuto_menu_1.SetActive(false);
+        tuto_menu_2.SetActive(false);
 
         start_menu.SetActive(false);
 
