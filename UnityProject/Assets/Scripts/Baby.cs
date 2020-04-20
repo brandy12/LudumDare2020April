@@ -51,6 +51,10 @@ public class Baby : MonoBehaviour
 
     [SerializeField] SpriteRenderer sprite_renderer_crying;
 
+    [SerializeField] GameObject bored_animator;
+    [SerializeField] GameObject hungry_animator;
+    [SerializeField] GameObject[] smelly_animator;
+
     //*********************************************************
     //          SOUND VARIABLES
     //*********************************************************
@@ -93,15 +97,21 @@ public class Baby : MonoBehaviour
 
         is_mouse_hover = false;
 
+        bored_animator.SetActive(false);
+        hungry_animator.SetActive(false);
+        smelly_animator[0].SetActive(false);
+        smelly_animator[1].SetActive(false);
     }
 
-    void Update() {
+    void Update()
+    {
         BarsManagement();
         SpritesManagement();
         MouseHoverManagement();
+        AnimationBabyStates();
     }
 
-
+    
     //*********************************************************
     //          ID
     //*********************************************************
@@ -144,6 +154,38 @@ public class Baby : MonoBehaviour
 
 
 
+    }
+
+    private void AnimationBabyStates()
+    {
+        if (IsBored())
+        {
+            bored_animator.SetActive(true);
+        }
+        else
+        {
+            bored_animator.SetActive(false);
+        }
+
+        if (IsHungry())
+        {
+            hungry_animator.SetActive(true);
+        }
+        else
+        {
+            hungry_animator.SetActive(false);
+        }
+
+        if (IsDirty())
+        {
+            smelly_animator[0].SetActive(true);
+            smelly_animator[1].SetActive(true);
+        }
+        else
+        {
+            smelly_animator[0].SetActive(false);
+            smelly_animator[1].SetActive(false);
+        }
     }
 
     //*********************************************************
