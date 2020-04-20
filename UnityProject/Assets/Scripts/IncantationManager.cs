@@ -64,7 +64,6 @@ public class IncantationManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         counterAudio -= Time.deltaTime * 2f;
         if (counterAudio <= 0f)
         {
@@ -72,6 +71,10 @@ public class IncantationManager : MonoBehaviour
         }
         if (IsOn)
         {
+            if (currentSequence[counterLetter] == ' ')
+            {
+                counterLetter++;
+            }
             foreach (char c in Input.inputString)
             {
                 if (c == currentSequence[counterLetter])
