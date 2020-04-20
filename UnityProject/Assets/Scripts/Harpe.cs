@@ -18,6 +18,8 @@ public class Harpe : MonoBehaviour
     bool is_mouse_hover;
     [SerializeField] SpriteRenderer sprite_mouse_hover;
 
+    [SerializeField] GameObject tuto_repair;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,8 @@ public class Harpe : MonoBehaviour
         btn.onClick.AddListener(() => {
             mainGame.TuneHarp();
         });
+
+        tuto_repair.SetActive(false);
     }
 
     // Update is called once per frame
@@ -35,8 +39,16 @@ public class Harpe : MonoBehaviour
     {
         if (mainGame.is_harp_broken) {
             sprite_renderer.sprite = sprite_broken;
+            if (mainGame.Number_babies == 1)
+            {
+                tuto_repair.SetActive(true);
+            }
         } else {
             sprite_renderer.sprite = sprite_normal;
+            if (mainGame.Number_babies == 1)
+            {
+                tuto_repair.SetActive(false);
+            }
         }
 
         MouseHoverManagement();

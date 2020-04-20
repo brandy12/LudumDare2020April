@@ -18,6 +18,10 @@ public class Basket : MonoBehaviour
 
     AudioManager audioManager;
 
+    [SerializeField] GameObject tuto_basket;
+
+    public GameObject Tuto_basket { get => tuto_basket; set => tuto_basket = value; }
+
     // Start is called before the first frame update
     void Start() {
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
@@ -28,6 +32,7 @@ public class Basket : MonoBehaviour
         });
 
         is_mouse_hover = false;
+        Tuto_basket.SetActive(false);
     }
 
     // Update is called once per frame
@@ -38,14 +43,33 @@ public class Basket : MonoBehaviour
         if (mainGame.dirty_diapers < mainGame.capacity_basket) {
             if (mainGame.dirty_diapers < (mainGame.capacity_basket - 1) / 2.0f) {
                 index = 0;
+                if (mainGame.Number_babies == 1)
+                {
+                    Tuto_basket.SetActive(false);
+                }
             } else {
                 index = 1;
+                if (mainGame.Number_babies == 1)
+                {
+                    tuto_basket.SetActive(true);
+                }
             }
             
         }
         
 
         sprite_renderer.sprite = sprites_basket[index];
+        if (!mainGame.Playing)
+        {
+            Tuto_basket.SetActive(false);
+        }
+        else
+        {
+            if (index == 1 || index == 2)
+            {
+                tuto_basket.SetActive(true);
+            }
+        }
 
         MouseHoverManagement();
     }
