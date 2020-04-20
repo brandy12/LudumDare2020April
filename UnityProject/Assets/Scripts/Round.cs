@@ -31,8 +31,8 @@ public class Round : MonoBehaviour {
         anim_round1 = new Animation2D("round1", sprites_round1, 2.0f, false);
         anim_next_round = new Animation2D("next round", sprites_next_round, 2.0f, false);
         anim_last_round = new Animation2D("last round", sprites_last_round, 2.0f, false);
-        anim_game_over = new Animation2D("game over", sprites_game_over, 2.0f, false);
-        anim_success = new Animation2D("success", sprites_success, 2.0f, false);
+        anim_game_over = new Animation2D("game over", sprites_game_over, 3.0f, false);
+        anim_success = new Animation2D("success", sprites_success, 3.0f, false);
         current_anim = null;
 
     }
@@ -40,14 +40,12 @@ public class Round : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log("Visible : " + visible);
-
+    
+        
         if (visible) {
 
             if (current_anim.evolve()) {
                 visible = false;
-                Debug.Log("FINISH");
             }
 
             img.sprite = current_anim.currentSprite();

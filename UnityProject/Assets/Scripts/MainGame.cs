@@ -85,6 +85,7 @@ public class MainGame : MonoBehaviour {
     public void Initialize() {
         // initialize variables for the beginning of the party
         // (to be called when trying to replay)
+        
 
         start_menu.SetActive(true);
         game_over_menu.SetActive(false);
@@ -233,8 +234,15 @@ public class MainGame : MonoBehaviour {
         
         if (incantationManager.PercentageCompleted()>=100.0f) {
             playing = false;
-            Debug.Log("finished level");
-            StartCoroutine(TransitionLevel(number_babies+1));            
+            if (number_babies == 5) {
+                if (playing) {
+                    StartCoroutine(Victory());
+                }
+            } else {
+                audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.end_level);
+                StartCoroutine(TransitionLevel(number_babies + 1));
+
+            }
         }
     }
 
@@ -359,36 +367,45 @@ public class MainGame : MonoBehaviour {
     //          GAME FUNCTIONS
     //*********************************************************
 
-    public void GameOver() {
-
+    public IEnumerator GameOver() {
         Playing = false;
-
+        audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.game_over);
         round_manager.PlayGameOver();
+        yield return new WaitForSeconds(2f);
+        
+        Initialize();
+
+
 
     }
 
 
-    public void Victory() {
-
+    public IEnumerator Victory() {
         Playing = false;
 
-        victory_menu.SetActive(true);
+        audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.success);
+        round_manager.PlaySuccess();
+        yield return new WaitForSeconds(2f);
     }
 
     public void DisplayTuto()
     {
+        audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.clic);
+
         tuto_menu.SetActive(true);
         start_menu.SetActive(false);
     }
 
-    public void DisplayStartMenu()
-    {
+    public void DisplayStartMenu() {
+        audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.clic);
         tuto_menu.SetActive(false);
         start_menu.SetActive(true);
     }
 
 
     public void StartGame() {
+
+        audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.clic);
         StartCoroutine(TransitionLevel(1));
     }
 
