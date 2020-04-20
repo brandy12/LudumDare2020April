@@ -122,9 +122,9 @@ public class IncantationManager : MonoBehaviour
         Reset();
 
         counter_sequence++;
-        if (counter_sequence >= sequence.Count) {
+        if (counter_sequence >= sequence.Count)
+        {
             isOn = false;
-            StartCoroutine(mainGame.Victory());
             return;
         }
         audio_manager.GetComponent<AudioSource>().PlayOneShot(audio_manager.end_sentence);

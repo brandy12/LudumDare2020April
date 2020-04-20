@@ -235,13 +235,10 @@ public class MainGame : MonoBehaviour {
     void TimeManagement() {
         //timeSurvived += Time.deltaTime;
         //pentagram.SetScale(timeSurvived);
-        
         if (incantationManager.PercentageCompleted()>=100.0f) {
             playing = false;
             if (number_babies == 5) {
-                if (playing) {
-                    StartCoroutine(Victory());
-                }
+                StartCoroutine(Victory());
             } else {
                 audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.end_level);
                 StartCoroutine(TransitionLevel(number_babies + 1));
@@ -426,6 +423,7 @@ public class MainGame : MonoBehaviour {
     }
 
     IEnumerator TransitionLevel(int i) {
+
         tuto_menu_1.SetActive(false);
         tuto_menu_2.SetActive(false);
 
