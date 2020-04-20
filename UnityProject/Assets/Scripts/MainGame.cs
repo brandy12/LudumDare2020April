@@ -247,8 +247,9 @@ public class MainGame : MonoBehaviour {
         //pentagram.SetScale(timeSurvived);
         
         if (incantationManager.PercentageCompleted()>=100.0f) {
-            BeginLevel(number_babies + 1);
+            playing = false;
             Debug.Log("finished level");
+            StartCoroutine(TransitionLevel());            
         }
     }
 
@@ -398,5 +399,11 @@ public class MainGame : MonoBehaviour {
     {
         tuto_menu.SetActive(false);
         start_menu.SetActive(true);
+    }
+
+    IEnumerator TransitionLevel()
+    {
+        yield return new WaitForSeconds(2f);
+        BeginLevel(number_babies + 1);
     }
 }
