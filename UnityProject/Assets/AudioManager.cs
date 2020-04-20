@@ -12,6 +12,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] babyCry;
     public AudioClip eating;
     public AudioClip backInTune;
+    public AudioClip clic;
+    public AudioClip end_sentence;
+    public AudioClip end_level;
+    public AudioClip success;
+    public AudioClip game_over;
 
     // Start is called before the first frame update
     void Start()

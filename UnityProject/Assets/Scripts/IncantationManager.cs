@@ -6,6 +6,9 @@ using DG.Tweening;
 
 public class IncantationManager : MonoBehaviour
 {
+
+    AudioManager audio_manager;
+
     [SerializeField] Text textDisplay;
     [SerializeField] CanvasGroup songCanvas;
 
@@ -57,6 +60,7 @@ public class IncantationManager : MonoBehaviour
     void Start()
     {
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
+        audio_manager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         NewSequence();
         sequence = new List<string>();
     }
@@ -121,8 +125,10 @@ public class IncantationManager : MonoBehaviour
         if (counter_sequence >= sequence.Count) {
             return;
         }
+        audio_manager.GetComponent<AudioSource>().PlayOneShot(audio_manager.end_sentence);
         currentSequence = sequence[counter_sequence];
         textDisplay.text = currentSequence;
+
     }
 
     public void NewSequence() {
