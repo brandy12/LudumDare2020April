@@ -1,8 +1,7 @@
 - Sous la main/curseur ya une ligne blanche TAM A FAIRE
 - Dans le tuto je crois que 1 c'est pour nourrir et 2 pour changer les couches non TAM A FAIRE
 - le son du changement de round je vais l'enregistrer EN ATTENTE
-- Musique à ajouter
-- Ajouter bulle 1,2,3 pour le premier niveau Adriana
+- Musique à ajouter (source drive)
 - Ajouter bruit de flamme pour la fin du jeu JO cherche son
-- update crédits
+- update crédits ajouter luc crédit
 - soumettre le jeu
