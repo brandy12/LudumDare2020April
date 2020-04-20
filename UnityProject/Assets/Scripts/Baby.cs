@@ -119,6 +119,12 @@ public class Baby : MonoBehaviour
             MouseHoverManagement();
             AnimationBabyStates();
         }
+        else
+        {
+            tuto_entertain.SetActive(false);
+            tuto_diaper.SetActive(false);
+            tuto_feeding.SetActive(false);
+        }
     }
 
     

@@ -67,7 +67,10 @@ public class Basket : MonoBehaviour
         {
             if (index == 1 || index == 2)
             {
-                tuto_basket.SetActive(true);
+                if (mainGame.Number_babies == 1)
+                {
+                    tuto_basket.SetActive(true);
+                }
             }
         }
 

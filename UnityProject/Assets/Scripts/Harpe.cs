@@ -52,6 +52,10 @@ public class Harpe : MonoBehaviour
         }
 
         MouseHoverManagement();
+        if (!mainGame.Playing)
+        {
+            tuto_repair.SetActive(false);
+        }
     }
 
 
