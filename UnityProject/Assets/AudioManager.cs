@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip changeDiaper;
     public AudioClip[] babyCry;
     public AudioClip eating;
+    public AudioClip backInTune;
 
     // Start is called before the first frame update
     void Start()

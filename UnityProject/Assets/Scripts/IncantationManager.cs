@@ -58,47 +58,26 @@ public class IncantationManager : MonoBehaviour
     {
         mainGame = GameObject.Find("MainGame").GetComponent<MainGame>();
         NewSequence();
-        //NextSentence();
         sequence = new List<string>();
-        //songCanvas.alpha = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //{
-        //    Reset();
-        //    InitializeSequence();
-        //    IsOn = true;
-        //    songCanvas.alpha = 1;
-        //}
 
         counterAudio -= Time.deltaTime * 2f;
         if (counterAudio <= 0f)
         {
-            //GetComponent<AudioSource>().Pause();
-            GetComponent<AudioSource>().DOFade(0.2f, 1f);
+            GetComponent<AudioSource>().DOFade(0.1f, 1f);
         }
         if (IsOn)
         {
-            //if another action is activated, it stops the song
-            //if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2)) {
-            //    Reset();
-            //    songCanvas.alpha = 0;
-            //    IsOn = false;
-            //}
-
             foreach (char c in Input.inputString)
             {
                 if (c == currentSequence[counterLetter])
                 {
                     counterAudio = 2f;
                     GetComponent<AudioSource>().DOFade(1f, 1f);
-                    if (!GetComponent<AudioSource>().isPlaying)
-                    {
-                        GetComponent<AudioSource>().Play();
-                    }
                     counterLetter++;
                     counterLetterTotal++;
                     mainGame.Incantation_counter++;
@@ -128,23 +107,6 @@ public class IncantationManager : MonoBehaviour
         counterLetter = 0;
         textDisplay.text = currentSequence;
     }
-
-    /*void InitializeSequence()
-    {
-        for (int i = 0; i < maxWords; i++)
-        {
-            if (i == 0)
-            {
-                currentSequence += sentenceArray[UnityEngine.Random.Range(0, sentenceArray.Length)];
-            }
-            else
-            {
-                currentSequence += " " + sentenceArray[UnityEngine.Random.Range(0, sentenceArray.Length)];
-            }
-        }
-
-        textDisplay.text = currentSequence;
-    }*/
 
     public void NextSentence()
     {

@@ -53,6 +53,6 @@ public class SoulsGenerator : MonoBehaviour
     }
 
     void SetNewTimer() {
-        timer_generation = 5.0f  + Random.Range(-1.0f, 3.0f);
+        timer_generation = 2.0f  + Random.Range(-1.0f, 3.0f);
     }
 }

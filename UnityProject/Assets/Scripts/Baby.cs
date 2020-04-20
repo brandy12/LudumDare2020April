@@ -244,5 +244,14 @@ public class Baby : MonoBehaviour
         }
     }
 
-    
+    public void MouseEnter()
+    {
+        is_mouse_hover = true;
+    }
+
+    public void MouseExit()
+    {
+        is_mouse_hover = false;
+    }
+
 }

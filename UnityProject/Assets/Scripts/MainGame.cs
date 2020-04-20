@@ -116,6 +116,8 @@ public class MainGame : MonoBehaviour {
 
         incantationManager.NewSequence();
         incantationManager.GetComponent<AudioSource>().Stop();
+        incantationManager.GetComponent<AudioSource>().volume = 0.1f;
+        incantationManager.GetComponent<AudioSource>().Play();
         incantation_counter = 0;
 
         durationLevel = 30 + (number_babies * 30);
@@ -203,6 +205,7 @@ public class MainGame : MonoBehaviour {
 
     public void TuneHarp() {
         if (is_harp_broken) {
+            audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.backInTune);
             //play sound
         }
         is_harp_broken = false;
