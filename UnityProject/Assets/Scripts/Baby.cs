@@ -211,8 +211,8 @@ public class Baby : MonoBehaviour
         if (CriticalNeed()) {
             timer_critical_need -= Time.deltaTime;
 
-            if (timer_critical_need <= 0) {
-                mainGame.GameOver();
+            if (timer_critical_need <= 0 && mainGame.Playing) {
+                StartCoroutine(mainGame.GameOver());
             }
         } else {
             timer_critical_need = duration_critical_need;
