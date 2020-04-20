@@ -437,7 +437,7 @@ public class MainGame : MonoBehaviour {
     public void StartGame() {
 
         audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.clic);
-        StartCoroutine(TransitionLevel(5));
+        StartCoroutine(TransitionLevel(1));
     }
 
     IEnumerator TransitionLevel(int i) {
@@ -466,12 +466,12 @@ public class MainGame : MonoBehaviour {
         timeSurvived = 0f;
 
         foreach (Transform t in souls) {
-            //Destroy(t.gameObject);
+            Destroy(t.gameObject);
         }
 
         round_manager.PlayRound(i);
 
-        if (i == 1 || i == 2 || i == 3) {
+        if (i == 1 || i == 2 || i == 3 || i==4) {
 
             audioManager.PlayMusic(audioManager.music1);
         } else {
