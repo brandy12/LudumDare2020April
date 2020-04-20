@@ -437,7 +437,7 @@ public class MainGame : MonoBehaviour {
     public void StartGame() {
 
         audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.clic);
-        StartCoroutine(TransitionLevel(1));
+        StartCoroutine(TransitionLevel(5));
     }
 
     IEnumerator TransitionLevel(int i) {
