@@ -55,6 +55,10 @@ public class Baby : MonoBehaviour
     [SerializeField] GameObject hungry_animator;
     [SerializeField] GameObject[] smelly_animator;
 
+    [SerializeField] GameObject tuto_feeding;
+    [SerializeField] GameObject tuto_diaper;
+    [SerializeField] GameObject tuto_entertain;
+
     //*********************************************************
     //          SOUND VARIABLES
     //*********************************************************
@@ -101,6 +105,10 @@ public class Baby : MonoBehaviour
         hungry_animator.SetActive(false);
         smelly_animator[0].SetActive(false);
         smelly_animator[1].SetActive(false);
+
+        tuto_entertain.SetActive(false);
+        tuto_diaper.SetActive(false);
+        tuto_feeding.SetActive(false);
     }
 
     void Update()
@@ -110,6 +118,12 @@ public class Baby : MonoBehaviour
             SpritesManagement();
             MouseHoverManagement();
             AnimationBabyStates();
+        }
+        else
+        {
+            tuto_entertain.SetActive(false);
+            tuto_diaper.SetActive(false);
+            tuto_feeding.SetActive(false);
         }
     }
 
@@ -163,30 +177,54 @@ public class Baby : MonoBehaviour
         if (IsBored())
         {
             bored_animator.SetActive(true);
+            if (mainGame.Number_babies == 1)
+            {
+                tuto_entertain.SetActive(true);
+            }
         }
         else
         {
             bored_animator.SetActive(false);
+            if (mainGame.Number_babies == 1)
+            {
+                tuto_entertain.SetActive(false);
+            }
         }
 
         if (IsHungry())
         {
             hungry_animator.SetActive(true);
+            if (mainGame.Number_babies == 1)
+            {
+                tuto_feeding.SetActive(true);
+            }
         }
         else
         {
             hungry_animator.SetActive(false);
+            if (mainGame.Number_babies == 1)
+            {
+                tuto_feeding.SetActive(false);
+            }
         }
 
         if (IsDirty())
         {
             smelly_animator[0].SetActive(true);
             smelly_animator[1].SetActive(true);
+            if (mainGame.Number_babies == 1)
+            {
+                tuto_diaper.SetActive(true);
+            }
         }
         else
         {
             smelly_animator[0].SetActive(false);
             smelly_animator[1].SetActive(false);
+            if (mainGame.Number_babies == 1)
+            {
+                tuto_diaper.SetActive(false);
+            }
         }
     }
 

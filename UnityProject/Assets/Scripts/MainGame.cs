@@ -57,6 +57,7 @@ public class MainGame : MonoBehaviour {
 
     public int Incantation_counter { get => incantation_counter; set => incantation_counter = value; }
     public bool Playing { get => playing; set => playing = value; }
+    public int Number_babies { get => number_babies; set => number_babies = value; }
 
     public int dirty_diapers;
     public int capacity_basket = 5;
@@ -69,6 +70,13 @@ public class MainGame : MonoBehaviour {
     //*********************************************************
 
     [SerializeField] Round round_manager;
+
+    //*********************************************************
+    //          IN-GAME TUTO
+    //*********************************************************
+
+    [SerializeField] GameObject tuto_incantation;
+    
 
     //*********************************************************
     //          UNITY FUNCTIONS
@@ -103,12 +111,15 @@ public class MainGame : MonoBehaviour {
         Cursor.visible = false;
 
         audioManager.GetComponent<AudioSource>().Stop();
+
+        tuto_incantation.SetActive(false);
+        basket.GetComponent<Basket>().Tuto_basket.SetActive(false);
     }
 
     public void BeginLevel(int _number_babies)
     {
 
-        durationLevel = 30 + (number_babies * 30);
+        durationLevel = 30 + (Number_babies * 30);
 
         dirty_diapers = 0;
 
@@ -118,9 +129,10 @@ public class MainGame : MonoBehaviour {
 
 
         Playing = true;
-
-
-
+        if (_number_babies == 1)
+        {
+            tuto_incantation.SetActive(true);
+        }
         
     }
 
@@ -148,12 +160,12 @@ public class MainGame : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             id_selected_baby -= 1;
             if (id_selected_baby < 0)
-                id_selected_baby = number_babies - 1;
+                id_selected_baby = Number_babies - 1;
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             id_selected_baby += 1;
-            if (id_selected_baby >= number_babies)
+            if (id_selected_baby >= Number_babies)
                 id_selected_baby = 0;
         }
 
@@ -237,11 +249,12 @@ public class MainGame : MonoBehaviour {
         //pentagram.SetScale(timeSurvived);
         if (incantationManager.PercentageCompleted()>=100.0f) {
             playing = false;
-            if (number_babies == 5) {
+            tuto_incantation.SetActive(false);
+            if (Number_babies == 5) {
                 StartCoroutine(Victory());
             } else {
                 audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.end_level);
-                StartCoroutine(TransitionLevel(number_babies + 1));
+                StartCoroutine(TransitionLevel(Number_babies + 1));
 
             }
         }
@@ -255,12 +268,12 @@ public class MainGame : MonoBehaviour {
 
         DestroyBabies();
 
-        for (int i = 0; i < number_babies; ++i) {
+        for (int i = 0; i < Number_babies; ++i) {
             Baby b = Baby.Instantiate(baby_prefab);
 
             b.transform.SetParent(babies, false);
             b.SetId(i);
-            b.transform.position = PositionPentagram(i, number_babies);
+            b.transform.position = PositionPentagram(i, Number_babies);
 
         }
     }
@@ -342,7 +355,7 @@ public class MainGame : MonoBehaviour {
     }
 
     void BabyHighlightManagement() {
-        baby_highlight.transform.position = PositionPentagram(id_selected_baby, number_babies);
+        baby_highlight.transform.position = PositionPentagram(id_selected_baby, Number_babies);
     }
 
     public void DestroyBabies()
@@ -431,7 +444,7 @@ public class MainGame : MonoBehaviour {
 
         basket.SetActive(true);
 
-        number_babies = i;
+        Number_babies = i;
         BabiesGeneration();
 
         hand_manager.Initialize();
