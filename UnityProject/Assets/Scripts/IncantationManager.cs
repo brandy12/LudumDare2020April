@@ -74,6 +74,8 @@ public class IncantationManager : MonoBehaviour
             if (currentSequence[counterLetter] == ' ')
             {
                 counterLetter++;
+                counterLetterTotal++;
+                mainGame.Incantation_counter++;
             }
             foreach (char c in Input.inputString)
             {
