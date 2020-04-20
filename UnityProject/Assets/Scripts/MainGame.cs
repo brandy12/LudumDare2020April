@@ -400,6 +400,8 @@ public class MainGame : MonoBehaviour {
 
         audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.success);
         audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.fire);
+        audioManager.StopMusic();
+
         round_manager.PlaySuccess();
 
         start_menu.SetActive(true);

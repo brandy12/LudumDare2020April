@@ -43,4 +43,8 @@ public class AudioManager : MonoBehaviour
         music.clip = c;
         music.Play();
     }
+
+    public void StopMusic() {
+        music.Stop();
+    }
 }
