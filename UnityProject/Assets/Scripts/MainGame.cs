@@ -94,6 +94,8 @@ public class MainGame : MonoBehaviour {
         id_selected_baby = 0;
 
         basket.SetActive(false);
+
+        Cursor.visible = false;
     }
 
     public void BeginLevel(int _number_babies)
