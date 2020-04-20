@@ -94,7 +94,8 @@ public class MainGame : MonoBehaviour {
     public void Initialize() {
         // initialize variables for the beginning of the party
         // (to be called when trying to replay)
-        
+
+        audioManager.PlayMusic(audioManager.music0);
 
         start_menu.SetActive(true);
         game_over_menu.SetActive(false);
@@ -109,7 +110,7 @@ public class MainGame : MonoBehaviour {
         basket.SetActive(false);
 
         Cursor.visible = false;
-
+        
         audioManager.GetComponent<AudioSource>().Stop();
 
         tuto_incantation.SetActive(false);
@@ -385,7 +386,7 @@ public class MainGame : MonoBehaviour {
         Playing = false;
         audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.game_over);
         round_manager.PlayGameOver();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         
         Initialize();
 
@@ -398,8 +399,12 @@ public class MainGame : MonoBehaviour {
         Playing = false;
 
         audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.success);
+        audioManager.GetComponent<AudioSource>().PlayOneShot(audioManager.fire);
         round_manager.PlaySuccess();
-        yield return new WaitForSeconds(2f);
+
+        start_menu.SetActive(true);
+
+        yield return new WaitForSeconds(5f);
 
         Initialize();
     }
@@ -466,6 +471,13 @@ public class MainGame : MonoBehaviour {
 
         round_manager.PlayRound(i);
 
+        if (i == 1 || i == 2 || i == 3) {
+
+            audioManager.PlayMusic(audioManager.music1);
+        } else {
+
+            audioManager.PlayMusic(audioManager.music2);
+        }
 
         yield return new WaitForSeconds(2f);
         BeginLevel(i);

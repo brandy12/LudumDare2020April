@@ -17,6 +17,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip end_level;
     public AudioClip success;
     public AudioClip game_over;
+    public AudioClip round_1;
+    public AudioClip next_round;
+    public AudioClip final_round;
+    public AudioClip fire;
+    public AudioClip music0;
+    public AudioClip music1;
+    public AudioClip music2;
+
+    [SerializeField] AudioSource music;
 
     // Start is called before the first frame update
     void Start()
@@ -28,5 +37,10 @@ public class AudioManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PlayMusic(AudioClip c) {
+        music.clip = c;
+        music.Play();
     }
 }

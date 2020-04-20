@@ -18,6 +18,7 @@ public class Round : MonoBehaviour {
     Animation2D anim_success;
 
     [SerializeField] Image img;
+    AudioManager audio_manager;
 
     bool visible;
     Animation2D current_anim;
@@ -26,7 +27,7 @@ public class Round : MonoBehaviour {
     void Start()
     {
         visible = false;
-        Debug.Log("Start");
+        audio_manager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         anim_round1 = new Animation2D("round1", sprites_round1, 2.0f, false);
         anim_next_round = new Animation2D("next round", sprites_next_round, 2.0f, false);
@@ -61,10 +62,13 @@ public class Round : MonoBehaviour {
     public void PlayRound(int i) {
         if (i == 1) {
             current_anim = anim_round1;
+            audio_manager.GetComponent<AudioSource>().PlayOneShot(audio_manager.round_1);
         } else if (i == 5) {
             current_anim = anim_last_round;
+            audio_manager.GetComponent<AudioSource>().PlayOneShot(audio_manager.final_round);
         } else {
             current_anim = anim_next_round;
+            audio_manager.GetComponent<AudioSource>().PlayOneShot(audio_manager.next_round);
         }
         visible = true;
         current_anim.Initialize();
