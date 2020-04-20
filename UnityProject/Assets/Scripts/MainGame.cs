@@ -67,6 +67,7 @@ public class MainGame : MonoBehaviour {
     //          ANIMATIONS
     //*********************************************************
 
+    [SerializeField] Round round_manager;
 
     //*********************************************************
     //          UNITY FUNCTIONS
@@ -101,27 +102,6 @@ public class MainGame : MonoBehaviour {
 
     public void BeginLevel(int _number_babies)
     {
-        start_menu.SetActive(false);
-
-        basket.SetActive(true);
-
-        number_babies = _number_babies;
-        id_selected_baby = 0;
-
-        timeSurvived = 0f;
-
-        Playing = true;
-
-        BabiesGeneration();
-
-        hand_manager.Initialize();
-        counter_souls = 0;
-
-        incantationManager.NewSequence();
-        incantationManager.GetComponent<AudioSource>().Stop();
-        incantationManager.GetComponent<AudioSource>().volume = 0.1f;
-        incantationManager.GetComponent<AudioSource>().Play();
-        incantation_counter = 0;
 
         durationLevel = 30 + (number_babies * 30);
 
@@ -129,9 +109,14 @@ public class MainGame : MonoBehaviour {
 
         is_harp_broken = false;
 
-        foreach (Transform t in souls) {
-            //Destroy(t.gameObject);
-        }
+
+
+
+        Playing = true;
+
+
+
+        
     }
 
     void Update() {
@@ -249,7 +234,7 @@ public class MainGame : MonoBehaviour {
         if (incantationManager.PercentageCompleted()>=100.0f) {
             playing = false;
             Debug.Log("finished level");
-            StartCoroutine(TransitionLevel());            
+            StartCoroutine(TransitionLevel(number_babies+1));            
         }
     }
 
@@ -378,7 +363,8 @@ public class MainGame : MonoBehaviour {
 
         Playing = false;
 
-        game_over_menu.SetActive(true);
+        round_manager.PlayGameOver();
+
     }
 
 
@@ -401,9 +387,42 @@ public class MainGame : MonoBehaviour {
         start_menu.SetActive(true);
     }
 
-    IEnumerator TransitionLevel()
+
+    public void StartGame() {
+        StartCoroutine(TransitionLevel(1));
+    }
+
+    IEnumerator TransitionLevel(int i)
     {
+
+        start_menu.SetActive(false);
+
+        basket.SetActive(true);
+
+        number_babies = i;
+        BabiesGeneration();
+
+        hand_manager.Initialize();
+        counter_souls = 0;
+
+        incantationManager.NewSequence();
+        incantationManager.GetComponent<AudioSource>().Stop();
+        incantationManager.GetComponent<AudioSource>().volume = 0.1f;
+        incantationManager.GetComponent<AudioSource>().Play();
+        incantation_counter = 0;
+
+        id_selected_baby = 0;
+
+        timeSurvived = 0f;
+
+        foreach (Transform t in souls) {
+            //Destroy(t.gameObject);
+        }
+
+        round_manager.PlayRound(i);
+
+
         yield return new WaitForSeconds(2f);
-        BeginLevel(number_babies + 1);
+        BeginLevel(i);
     }
 }
